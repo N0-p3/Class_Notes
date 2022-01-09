@@ -2,6 +2,7 @@
 ## Données et déclaration
 ### Variables
 `let` est utilisé pour créer des variables de tout types et `const` est utilisé pour créer des constantes de tout types, les deux s'utilisent de la façon suivante : 
+
 ```javascript
 let a = 1;
 let b = true;
@@ -11,11 +12,13 @@ const e = false;
 const f = 'tonpere'
 ```
 Les déclarations peuvent aussi être séparés par des virgules pour être sur une même ligne (si `let` est placer au début, toutes les variables seront variables et inversement pour `const`) :
+
 ```javascript
 let g = 'Geofroy', h = true, i = 480;
 ```
 ### Tableaux
 On utilise tout le temps `const` puisque un tableau est en théorie immuable, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
+
 ```javascript
 const voitures = ["Saab", "Volvo", "BMW"]; //Avec données
 const jeux = []; //Sans données
@@ -27,6 +30,7 @@ jeux[1] = 'The Witcher III : The Wild Hunt'
 jeux[2] = 'tamere : la pute'
 ```
 **Note** : La déclaration d'un tableau avec le mot `new` peut causer des comportements inattendus, exemple : 
+
 ```javascript
 //Créer un tableau avec 1 élément 
 const chiffres1 = [40];
@@ -34,6 +38,7 @@ const chiffres1 = [40];
 const chiffres2 = new Array(40);
 ```
 **Note 2** : Membre important d'un tableau : 
+
 ```javascript
 nomDuTableau.push();    //Ajouter au tableau
 nomDuTableau.length;    //Longueur du tableau
@@ -43,15 +48,18 @@ nomDuTableau.join()     //Fait une grosse string avec le contenu du tableau
 **Note 3** : On peut mettre tout type de données **CONFONDUES** dans un tableau incluant des objets et des fonctions (apparement).
 ### Objet
 On utilise tout le temps `const` puisque c'est une norme, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
+
 ```javascript
 const voiture = {type:'Fiat', model:'500', color:'white'};
 ```
 On peut aussi accéder au donnée d'un objet de plusieurs manières :
+
 ```javascript
 voiture.type
 voiture['type']
 ```
 **Note** : On peut stocker des fonctions (que l'on va par la suite appelé méthodes) dans un objet et les appelés ainsi :
+
 ```javascript
 const voiture = {type:'Fiat', 
                  model:'500', 
@@ -64,6 +72,7 @@ voiture.setColor('green');
 ```
 **Note 2** : NE PAS CRÉER DE VARIABLES DE TYPE PRIMAL EN TANT QU'OBJET, C'EST MAL! (ralenti l'éxécution et complique le code).
 Exemple **A NE PAS FAIRE** :
+
 ```javascript
 x = new String();
 y = new Number();
@@ -73,6 +82,7 @@ z = new Boolean();
 ## Blocs conditionnels
 ### If
 La syntaxe du `if` va comme suit :
+
 ```javascript
 if (condition1) {
     //code
@@ -84,6 +94,7 @@ if (condition1) {
 ```
 ### Switch
 La syntaxe du `switch` va comme suit :
+
 ```javascript
 switch(expression) {
     case x:
@@ -100,6 +111,7 @@ switch(expression) {
 ## Boucles
 ### For
 La syntaxe du `for` va comme suit :
+
 ```javascript
 for (let i = 0; i < 10; i++) {
     //code
@@ -107,6 +119,7 @@ for (let i = 0; i < 10; i++) {
 ```
 ### While
 La syntaxe du `while` va comme suit :
+
 ```javascript
 while (condition) {
     //code
@@ -114,6 +127,7 @@ while (condition) {
 ```
 ### Do While
 La syntaxe du `do while` va comme suit :
+
 ```javascript
 do {
     //code
@@ -122,9 +136,62 @@ while (condition);
 ```
 ## Fonctions
 La syntaxe d'une fonction va comme suit :
+
 ```javascript
 function myFunction(p1, p2) {
     //code
 }
 ```
-**Note** : La fonction peut retourner quelque chose ou pas et prendre des paramêtres ou pas.
+**Note** : La fonction peut retourner quelque chose ou pas et prendre des paramètres ou pas.
+### Appel de fonctions
+L'appel d'une fonction est très simple, il suffit d'écrire son nom et de lui donner ses paramètres entre parenthèses et si celle-ci appartient à un objet, l'appeler à partir de son objet ainsi : 
+
+```javascript
+sum(2, 2);          //fonction globale
+person.incrAge();    //fonction d'un objet
+```
+## Fonctions anonymes
+Les fonction anonymes sont des fonctions qui au lieu d'être instanciée dans une variable ne sont jamais instanciée et plutôt définies sur le champs, en voici un exemple :
+
+```javascript
+setTimeout(function() {
+    console.log('Execute later after 1 second')
+}, 1000);
+```
+Ce qui se passe ici est que la fonction `setTimeout()` nécéssite une autre fonction en paramètre, sauf que au lieu de définir cette fonction au paravent et de la passer ensuite en paramètre, on la définit sur le champs et ensuite on continue à passer les paramètre que `setTimeout()` attend, comme si de rien.
+## Fonctions flèches
+Les fonctions flèche (arrow function) sont une autre façon d'écrire une fonction qui est particulièrement utile lors de l'écriture de fonctions anonymes. Voyons, à l'aide d'étapes, comment transformer une fonction simple en un fonction flèche encore plus simple.
+<br><br>
+Voici la fonction de base : 
+
+```javascript
+function sum(a, b) {
+    return a + b;
+}
+``` 
+la première étape est de se débarasser du mot clef `function` et de mettre cette fonction dans une variable :
+
+```javascript
+let sum = (a, b) => {
+    return a + b;
+}
+```
+Et voila, le tour est joué en majorité. je dit bien en majorité puisque vue que la fonction ne fait qu'une ligne il est possible de la simplifier encore plus avec cette prochaine étape.
+<br><br>
+Vue que nous n'avons qu'une seule ligne de code nous pouvons retirer les `{}`, mettre le tout sur une seule ligne et enlever le mot clef `return` pusique celui-ci est assumé par javascript, ce qui nous donne :
+
+```javascript
+let sum = (a, b) => a + b;
+```
+**Note** : Si il n'y à qu'un seul paramètre à la fonction, on pourrait enlever les parenthèses entourant les paramètres. <br>
+**Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal.
+**Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie. (Ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris)
+### Fonctions flèches anonymes
+Effectivement, les fonctions flèches sont surtout utile lorsque nous devons faire des fonctions anonymes. Voici l'exemple d'un peu plus haut en fonction flèche anonyme :
+
+```javascript
+setTimeout(() => {
+    console.log('Execute later after 1 second')
+}, 1000);
+```
+**Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
