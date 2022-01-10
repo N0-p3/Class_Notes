@@ -1,11 +1,15 @@
- # Table des matières
-- [Bases](Notes/Bases.md)
+# Table des matières
+- [**Bases**](Notes/Bases.md)
   - [Données et déclaration](Notes/Bases.md#données-et-déclaration)
     - [Variables](Notes/Bases.md#variables)
     - [Tableaux](Notes/Bases.md#tableaux)
+      - [Syntaxe étendue (spread syntax)](Notes/Bases.md#syntaxe-étendue-spread-syntax)
     - [Objet](Notes/Bases.md#objet)
+    - [Classe](Notes/Bases.md#classe)
+      - [Déstructurisation](Notes/Bases.md#déstructurisation)
   - [Blocs conditionnels](Notes/Bases.md#blocs-conditionnels)
     - [If](Notes/Bases.md#if)
+    - [Inline if](Notes/Bases.md#inline-if)
     - [Switch](Notes/Bases.md#switch)
   - [Boucles](Notes/Bases.md#boucles)
     - [For](Notes/Bases.md#for)
@@ -16,8 +20,17 @@
   - [Fonctions anonymes](Notes/Bases.md#fonctions-anonymes)
   - [Fonctions flèches](Notes/Bases.md#fonctions-flèches)
     - [Fonctions flèches anonymes](Notes/Bases.md#fonctions-flèches-anonymes)
-- [Modules](Notes/Modules.md#modules)
+  <br><br>
+- [**Affichage à la console**](Notes/Affichage_a_la_console.md)
+  - [Litéraux de modèle (template literals)](Notes/Affichage_a_la_console.md#litéraux-de-modèle-template-literals)
+  - [Afficher le nom des variables](Notes/Affichage_a_la_console.md#afficher-le-nom-des-variables)
+  - [Afficher les données sous forme de table](Notes/Affichage_a_la_console.md#afficher-les-données-sous-forme-de-table)
+  - [Afficher le temps à la console](Notes/Affichage_a_la_console.md#afficher-le-temps-à-la-console)
+  - [Afficher un trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)
+  <br><br>
+- [**Modules**](Notes/Modules.md#modules)
   - [Création d'un module (sous forme d'objet)](Notes/Modules.md#création-dun-module-sous-forme-dobjet)
   - [Chargement d'un module (sous forme d'objet)](Notes/Modules.md#chargement-dun-module-sous-forme-dobjet)
   - [Création d'un module (sous forme singulière)](Notes/Modules.md#création-dun-module-sous-forme-singulière)
   - [Chargement d'un module (sous forme singulière)](Notes/Modules.md#chargement-dun-module-sous-forme-singulière)
+  <br><br>

@@ -46,8 +46,29 @@ nomDuTableau.forEach(); //itérer sur le tableau (en y passant une fonction)
 nomDuTableau.join()     //Fait une grosse string avec le contenu du tableau
 ```
 **Note 3** : On peut mettre tout type de données **CONFONDUES** dans un tableau incluant des objets et des fonctions (apparement).
+#### Syntaxe étendue (spread syntax)
+La syntaxe étendue permet de dire "prend tout les données dans ce tableau", exemple :
+
+```javascript
+let a = ['un', 'deux'];
+let b = ['trois', 'quatre'];
+
+let c = [...a, ...b];
+console.log(c); //Résultat : [ 'un', 'deux', 'trois', 'quatre' ]
+```
+Avec cette syntaxe nous pouvons donc faire des `push` ou des `unshift` manuellement de plusieur choses en même temps (et de manière plus belle) :
+
+```javascript
+let a = ['un', 'deux', 'trois', 'quatre'];
+
+//Push
+a = [...a, 'cinq', 'six', 'sept'];
+
+//Unshift
+a = ['moins un', 'zero', a...];
+```
 ### Objet
-On utilise tout le temps `const` puisque c'est une norme, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
+Un objet sert a réunir des données ensemble pour faciliter la représentation de quelque chose (abstrait ou pas). Normalement, on doit avoir une classe pour faire des objets mais pas en Javascript parce que ... Javascript. On utilise tout le temps `const` puisque c'est une norme, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
 
 ```javascript
 const voiture = {type:'Fiat', model:'500', color:'white'};
@@ -61,12 +82,12 @@ voiture['type']
 **Note** : On peut stocker des fonctions (que l'on va par la suite appelé méthodes) dans un objet et les appelés ainsi :
 
 ```javascript
-const voiture = {type:'Fiat', 
-                 model:'500', 
-                 color:'white',
-                 setColor : function(newColor) {
-                     this.color = newColor;
-                 }
+const voiture = {   type:'Fiat', 
+                    model:'500', 
+                    color:'white',
+                    setColor : function(newColor) {
+                        this.color = newColor;
+                    }
                 };
 voiture.setColor('green');
 ```
@@ -78,6 +99,50 @@ x = new String();
 y = new Number();
 z = new Boolean(); 
 ```
+### Classe
+Les classes sont les moules à objets OO de Javascript. Le "boilerplate code" d'une classe en Javascript est le suivant :
+```javascript
+class ClassName {
+    constructor(parameter1, parameter2) {
+        this.property1 = parameter1;
+        this.property2 = parameter2;
+    }
+    doStuff() {
+        //code
+    }
+}
+```
+Afin de déclarer un objet à partir d'une classe, il suffit d'écrire le code suivant :
+```javascript
+let foo = new ClassName(parameter1, parameter2);
+```
+#### Déstructurisation
+Si nous avons une fonction qui prend en paramètre un objet mais que nous n'utilisons que quelques unes de ces propriétés, la déstructurisation est optimale. La déstructurisation permet de minimiser la répétition de code en plaçant les propriété nécessaire d'une fonction dans un objet reçu en paramètre d'une fonction. En voici un exemple :
+<br>
+<br>
+Imaginons que nous avons un objet représentant une tortue et que nous voulons y faire une fonction qui nourrit l'animal (elle ne fera qu'imprimer de l'information à la console).
+
+```javascript
+const turtle = {
+    name: 'Bob',
+    health: 10,
+    biteForce: 15,
+    legs: 4,
+    shell: true,
+    type: 'amphibious',
+    meal: 10,
+    diet: 'berries'
+}
+//Fonction normale (mauvaise)
+function feed(animal) {
+    console.log(`Fed ${animal.name} ${animal.meal} ${animal.diet}`);
+}
+//Fonction déstructurisé (bonne)
+function feedDestructured({name, meal, diet}) {
+    console.log(`Fed ${name} ${meal} ${diet}`);
+}
+```
+**Note** : Le code n'est pas nécéssairement plus court dans cet exemple-ci mais dans un exemple avec un plus gros objet ou nous devions utiliser à mainte reprise plusieurs des propriétés, la déstructurisation devient optimale.
 
 ## Blocs conditionnels
 ### If
@@ -92,6 +157,12 @@ if (condition1) {
     //code
 }
 ```
+### Inline if
+La syntaxe du inline if va comme suit :
+```javascript
+let c = ((a < b) ? true : false);
+```
+Si la condition est vraie, `true` sera associer à `c` sinon `false` y sera associé. <br>**Note** : Le inline if est entourer de parenthèses.
 ### Switch
 La syntaxe du `switch` va comme suit :
 
@@ -148,7 +219,7 @@ L'appel d'une fonction est très simple, il suffit d'écrire son nom et de lui d
 
 ```javascript
 sum(2, 2);          //fonction globale
-person.incrAge();    //fonction d'un objet
+person.getAge();    //fonction d'un objet
 ```
 ## Fonctions anonymes
 Les fonction anonymes sont des fonctions qui au lieu d'être instanciée dans une variable ne sont jamais instanciée et plutôt définies sur le champs, en voici un exemple :
