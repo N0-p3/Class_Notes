@@ -29,8 +29,11 @@
   - [Afficher un trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)
   <br><br>
 - [**Modules**](Notes/Modules.md#modules)
+  - [Théorie](Notes/Modules.md#théorie)
   - [Création d'un module (sous forme d'objet)](Notes/Modules.md#création-dun-module-sous-forme-dobjet)
   - [Chargement d'un module (sous forme d'objet)](Notes/Modules.md#chargement-dun-module-sous-forme-dobjet)
   - [Création d'un module (sous forme singulière)](Notes/Modules.md#création-dun-module-sous-forme-singulière)
   - [Chargement d'un module (sous forme singulière)](Notes/Modules.md#chargement-dun-module-sous-forme-singulière)
+  - [Module Path](Notes/Modules.md#module-path)
+  - [Module OS](Notes/Modules.md#module-os)
   <br><br>
