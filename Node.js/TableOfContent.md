@@ -20,6 +20,7 @@
   - [Fonctions anonymes](Notes/Bases.md#fonctions-anonymes)
   - [Fonctions flèches](Notes/Bases.md#fonctions-flèches)
     - [Fonctions flèches anonymes](Notes/Bases.md#fonctions-flèches-anonymes)
+  - [Possibles erreurs à l'installation](Notes/Bases.md#possibles-erreurs-a-l'installation)
   <br><br>
 - [**Affichage à la console**](Notes/Affichage_a_la_console.md)
   - [Litéraux de modèle (template literals)](Notes/Affichage_a_la_console.md#litéraux-de-modèle-template-literals)

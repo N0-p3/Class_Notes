@@ -266,3 +266,7 @@ setTimeout(() => {
 }, 1000);
 ```
 **Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
+## Possibles erreurs à l'installation
+Voici une mini-liste des erreures que vous pourriez rencontrez durant l'installation, si le lien est coché c'est que la solution à fonctionnée pour moi :) .
+<br>
+[x] [dpkg: error processing archive unpack](https://github.com/nodesource/distributions/issues/1157)

@@ -97,3 +97,26 @@ console.log(`Mémoire totale : ${totalMem} \nMémoire libre : ${freeMem}`);
  * Mémoire libre : 6432976896
  */
 ```
+## Module File System
+Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/fs.html) si vous en avez besoin.
+<br><br>
+Ce module permet d'intéragir avec les fichiers (écrire, lire créer et supprimer), pour commencer il suffit de l'inclure ainsi :
+
+```javascript
+const fs = require('fs');
+```
+**Note** : La plupart des fonctions dans le module File System sont en double, une version est la version synchrone et l'autre est asynchrone. Par exemple `access()` est async et `accessSync()` est synchrone. De plus, toutes fonctions asynchrones prennent un argument de plus, l'argument se trouve à être une fonction qui est appelé une fois que l'opération est terminé (c'est la callback function).
+<br><br>
+Exemple d'usage du module File System :
+
+```javascript
+//Manière synchrone
+const files = fs.readdirSync('./');
+console.log(files);
+
+//Manière asynchrone
+fs.readdir('./', (err, files) => {
+    if (err) {console.log(err);}
+    else {console.log(files);}
+});
+```
