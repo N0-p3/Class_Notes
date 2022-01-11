@@ -145,6 +145,21 @@ function feedDestructured({name, meal, diet}) {
 ```
 **Note** : Le code n'est pas nécéssairement plus court dans cet exemple-ci mais dans un exemple avec un plus gros objet ou nous devions utiliser à mainte reprise plusieurs des propriétés, la déstructurisation devient optimale.
 
+#### Héritage
+Afin de créer une classe qui hérite d'une autre classe, il suffit d'utilisé le mot clef `extends` après la définition de la classe ainsi :
+```javascript
+class ClassName extends SomeOtherClass{
+    constructor(parameter1, parameter2) {
+        this.property1 = parameter1;
+        this.property2 = parameter2;
+    }
+    doStuff() {
+        //code
+    }
+}
+```
+Ainsi, la classe `ClassName` hérite de `SomeOtherClass` ainsi que de tout ses membres.
+
 ## Blocs conditionnels
 ### If
 La syntaxe du `if` va comme suit :
