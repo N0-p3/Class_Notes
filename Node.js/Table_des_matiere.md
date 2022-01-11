@@ -37,4 +37,8 @@
   - [Chargement d'un module (sous forme singulière)](Notes/Modules.md#chargement-dun-module-sous-forme-singulière)
   - [Module Path](Notes/Modules.md#module-path)
   - [Module OS](Notes/Modules.md#module-os)
+  - [Module File System](Notes/Modules.md#module-file-system)
+  - [Module Event](Notes/Modules.md#module-event)
+    - [Argument d'évènement](Notes/Modules.md#argument-dévènement)
   <br><br>
+

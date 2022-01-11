@@ -154,4 +154,17 @@ En bref :
 la fonction `on()` **OU** `addListener()` ajoute un listener à un évènement et la fonction `emit()` appel l'évènement passé en paramètre.
 
 ### Argument d'évènement
-Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant
+Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant les données que vous voulez passer au "listener" et de le recevoir en ajoutant un paramêtre à la fonction qui écoute l'évènement. Comme ceci :
+```javascript
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+//Register to an event
+emitter.addListener('eventName', (arg) => {
+    console.log(`Data received : ${arg.number}, ${arg.type}, ${arg.penisSize}`);
+});
+
+//Raise an event
+emitter.emit('eventName', {number: 480, type: 'Sentient', penisSize: 'Xlarge'});
+```
+**Note** : Il est tout à fait possible de déstructuriser l'objet reçu ou encore d'envoyer plusieur objets (dans un tableau). Je dit bien l'un **OU** l'autre puisque on ne peut déstructurer un tableau d'objet.
