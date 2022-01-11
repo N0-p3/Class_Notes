@@ -7,6 +7,7 @@
     - [Objet](Notes/Bases.md#objet)
     - [Classe](Notes/Bases.md#classe)
       - [Déstructurisation](Notes/Bases.md#déstructurisation)
+      - [Héritage](Notes/Bases.md#Héritage)
   - [Blocs conditionnels](Notes/Bases.md#blocs-conditionnels)
     - [If](Notes/Bases.md#if)
     - [Inline if](Notes/Bases.md#inline-if)
