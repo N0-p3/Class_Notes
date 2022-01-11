@@ -201,3 +201,5 @@ console.log(`Listening on port ${PORT}...`);
 **Note** : Remarquez comment on doit terminer chaque réponse avec un `response.end();` ce qui suggère une certaines flexibilité dans notre abilité à écrire des réponses.
 <br>
 **Note 2** : `JSON.stringify()` peut aussi prendre des objets.
+<br>
+**Note 3** : Comme vous vous en doutez, on va pas vraiment utiliser Node.js pour faire un serveur http puisque plus on ajoute de route (de pages en gros) plus que le site va être lourd. C'est pour ça que l'on va utilisé Express.js pour gérer le serveur "BackEnd".
