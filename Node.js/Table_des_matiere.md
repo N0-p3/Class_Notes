@@ -27,7 +27,7 @@
   - [Afficher le nom des variables](Notes/Affichage_a_la_console.md#afficher-le-nom-des-variables)
   - [Afficher les données sous forme de table](Notes/Affichage_a_la_console.md#afficher-les-données-sous-forme-de-table)
   - [Afficher le temps à la console](Notes/Affichage_a_la_console.md#afficher-le-temps-à-la-console)
-  - [Afficher un trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)
+  - [Afficher une trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)
   <br><br>
 - [**Modules**](Notes/Modules.md#modules)
   - [Théorie](Notes/Modules.md#théorie)

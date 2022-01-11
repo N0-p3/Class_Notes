@@ -61,7 +61,7 @@ lorsque le code executera `console.timeEnd()` le résultat sera afficher à la c
 ```
 execution time: 77.756ms
 ```
-## Afficher un trace d'exécution
+## Afficher une trace d'exécution
 Afin d'afficher ou une fonction fut définie et ou elle fut appelé, il suffit d'appeler la fonction trace de la console et de lui passer un identifiant pour en faire la trace :
 
 ```javascript
