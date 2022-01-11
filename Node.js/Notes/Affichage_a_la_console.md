@@ -24,7 +24,7 @@ console.log({foo, bar, biz});
 ```
 Avec un affichage ressemblant à cela :
 
-```javascript
+```
 {
     foo: { name: 'Martin', age: 35, competent: true },
     bar: { name: 'David', age: 22, competent: true },
@@ -55,7 +55,7 @@ Lorsque nous faisons un benchmark (par exemple) il serait plutôt utile de logge
 ```javascript
 console.time('execution time');
 //code
-console.timeEnd('execution time')
+console.timeEnd('execution time');
 ```
 lorsque le code executera `console.timeEnd()` le résultat sera afficher à la console ainsi : 
 ```

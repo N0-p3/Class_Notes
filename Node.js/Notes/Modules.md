@@ -91,11 +91,11 @@ let totalMem = os.totalmem();
 let freeMem = os.freemem();
 
 console.log(`Mémoire totale : ${totalMem} \nMémoire libre : ${freeMem}`);
-
-/* Affichage à la console :
- * Mémoire totale : 12347944960 
- * Mémoire libre : 6432976896
- */
+```
+Affichage à la console :
+```
+Mémoire totale : 12347944960 
+Mémoire libre : 6432976896
 ```
 ## Module File System
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/fs.html) si vous en avez besoin.
@@ -120,3 +120,38 @@ fs.readdir('./', (err, files) => {
     else {console.log(files);}
 });
 ```
+## Module Event
+Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/events.html) si vous en avez besoin.
+<br><br>
+Ce module permet de créer des évènements et de les gérer (faire l'abonement d'une fonction à une autre, de les décrires et etc.). Pour commencer il suffit de l'inclure ainsi :
+
+```javascript
+const EventEmitter = require('events');
+//instanciation
+const emitter = new EventEmitter();
+```
+**Note** : Remarquez que j'ai délibérement écrit `EventEmitter` en UpperCamelCase, j'ai fait cela puisque le retour de ce require n'est pas un module mais bien une classe (et non un objet). Ce qui explique la seconde ligne ou je fait une instance (un objet) de cette classe que j'ai importé.
+<br><br>
+Voici un exemple très simple d'un événement élevé (Raise an event) et d'un abonnement à cet évènement (Register a listener) :
+
+```javascript
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+//Register to an event
+emitter.on('eventName', () => {
+    console.log('Fait quelque chose...');
+});
+
+//Raise an event
+emitter.emit('eventName');
+```
+**Explication** : Donc en gros, nous avons fait un "listener" qui écoute si un évènement au nom de `eventName` est levé et on lui passe une fonction qui est la fonction qui sera exécuter lorsque l'évènement sera levé (dans mon cas j'ai fais une fonction flèche anonyme qui ne fait que "logger" quelque chose).
+<br><br>
+Et ensuite nous avons levé l'évènement avec la fonction `emit()` en lui passant le nom de l'évènement à levé!
+<br><br>
+En bref :
+la fonction `on()` **OU** `addListener()` ajoute un listener à un évènement et la fonction `emit()` appel l'évènement passé en paramètre.
+
+### Argument d'évènement
+Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant

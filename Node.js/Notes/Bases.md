@@ -6,10 +6,10 @@
 ```javascript
 let a = 1;
 let b = true;
-let c = 'tamere'
+let c = 'tamere';
 const d = 2;
 const e = false;
-const f = 'tonpere'
+const f = 'tonpere';
 ```
 Les déclarations peuvent aussi être séparés par des virgules pour être sur une même ligne (si `let` est placer au début, toutes les variables seront variables et inversement pour `const`) :
 
@@ -20,14 +20,14 @@ let g = 'Geofroy', h = true, i = 480;
 On utilise tout le temps `const` puisque un tableau est en théorie immuable, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
 
 ```javascript
-const voitures = ["Saab", "Volvo", "BMW"]; //Avec données
-const jeux = []; //Sans données
-const pays = new Array("Canada", "État-Unis", "France", "Espagne", "Maroc") //Avec le mot clef new
+const voitures = ["Saab", "Volvo", "BMW"];                                   //Avec données
+const jeux = [];                                                             //Sans données
+const pays = new Array("Canada", "État-Unis", "France", "Espagne", "Maroc"); //Avec le mot clef new
 
 //Ajout de données (même si jeux est un const)
 jeux[0] = 'Skyrim';
-jeux[1] = 'The Witcher III : The Wild Hunt'
-jeux[2] = 'tamere : la pute'
+jeux[1] = 'The Witcher III : The Wild Hunt';
+jeux[2] = 'tamere : la pute';
 ```
 **Note** : La déclaration d'un tableau avec le mot `new` peut causer des comportements inattendus, exemple : 
 
@@ -39,12 +39,13 @@ const chiffres2 = new Array(40);
 ```
 **Note 2** : Membre important d'un tableau : 
 
-```javascript
-nomDuTableau.push();    //Ajouter au tableau
-nomDuTableau.length;    //Longueur du tableau
-nomDuTableau.forEach(); //itérer sur le tableau (en y passant une fonction)
-nomDuTableau.join()     //Fait une grosse string avec le contenu du tableau
-```
+| Membre    | Description                                        |
+|-----------|----------------------------------------------------|
+| push()    | Ajouter un élément au tableau.                     |
+| forEach() | Itérer sur le tableau (en y passant une fonction). |
+| join()    | Fait une grosse string avec le contenu du tableau. |
+| length    | Retourne la longueur du tableau.                   |
+
 **Note 3** : On peut mettre tout type de données **CONFONDUES** dans un tableau incluant des objets et des fonctions (apparement).
 #### Syntaxe étendue (spread syntax)
 La syntaxe étendue permet de dire "prend tout les données dans ce tableau", exemple :
@@ -226,10 +227,10 @@ Les fonction anonymes sont des fonctions qui au lieu d'être instanciée dans un
 
 ```javascript
 setTimeout(function() {
-    console.log('Execute later after 1 second')
+    console.log('Execute later after 1 second');
 }, 1000);
 ```
-Ce qui se passe ici est que la fonction `setTimeout()` nécéssite une autre fonction en paramètre, sauf que au lieu de définir cette fonction au paravent et de la passer ensuite en paramètre, on la définit sur le champs et ensuite on continue à passer les paramètre que `setTimeout()` attend, comme si de rien.
+**Explication** : La fonction `setTimeout()` nécéssite une autre fonction en paramètre, sauf que au lieu de définir cette fonction au paravent et de la passer ensuite en paramètre, on la définit sur le champs et ensuite on continue à passer les paramètre que `setTimeout()` attend, comme si de rien.
 ## Fonctions flèches
 Les fonctions flèche (arrow function) sont une autre façon d'écrire une fonction qui est particulièrement utile lors de l'écriture de fonctions anonymes. Voyons, à l'aide d'étapes, comment transformer une fonction simple en un fonction flèche encore plus simple.
 <br><br>
@@ -262,7 +263,7 @@ Effectivement, les fonctions flèches sont surtout utile lorsque nous devons fai
 
 ```javascript
 setTimeout(() => {
-    console.log('Execute later after 1 second')
+    console.log('Execute later after 1 second');
 }, 1000);
 ```
 **Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
