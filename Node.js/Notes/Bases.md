@@ -270,8 +270,10 @@ Vue que nous n'avons qu'une seule ligne de code nous pouvons retirer les `{}`, m
 ```javascript
 let sum = (a, b) => a + b;
 ```
-**Note** : Si il n'y à qu'un seul paramètre à la fonction, on pourrait enlever les parenthèses entourant les paramètres. <br>
-**Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal.
+**Note** : Si il n'y à qu'un seul paramètre à la fonction, on pourrait enlever les parenthèses entourant les paramètres. 
+<br>
+**Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal. 
+<br>
 **Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie. (Ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris)
 ### Fonctions flèches anonymes
 Effectivement, les fonctions flèches sont surtout utile lorsque nous devons faire des fonctions anonymes. Voici l'exemple d'un peu plus haut en fonction flèche anonyme :

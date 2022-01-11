@@ -168,3 +168,36 @@ emitter.addListener('eventName', (arg) => {
 emitter.emit('eventName', {number: 480, type: 'Sentient', penisSize: 'Xlarge'});
 ```
 **Note** : Il est tout à fait possible de déstructuriser l'objet reçu ou encore d'envoyer plusieur objets (dans un tableau). Je dit bien l'un **OU** l'autre puisque on ne peut déstructurer un tableau d'objet.
+## Module HTTP
+Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/http.html) si vous en avez besoin.
+<br><br>
+Ce module permet de créer un server, de gérer ses connections et plus encore, pour commencer il suffit de l'inclure ainsi :
+
+```javascript
+const http = require('http');
+```
+La création d'un serveur va comme suit (je ne vais pas l'expliquer elle est asser "self-explanatory") :
+```javascript
+const http = require('http');
+
+const PORT = 8000;
+
+const server = http.createServer((request, response) =>{
+    switch(request.url) {
+        case '/': //HTTP request
+            response.write('This is the home page :)');
+            response.end();
+            break; ///API request
+        case '/api/someAPI':
+            response.write(JSON.stringify([1, 2, 3]));
+            response.end();
+            break;
+    }
+});
+
+server.listen(PORT);
+console.log(`Listening on port ${PORT}...`);
+```
+**Note** : Remarquez comment on doit terminer chaque réponse avec un `response.end();` ce qui suggère une certaines flexibilité dans notre abilité à écrire des réponses.
+<br>
+**Note 2** : `JSON.stringify()` peut aussi prendre des objets.
