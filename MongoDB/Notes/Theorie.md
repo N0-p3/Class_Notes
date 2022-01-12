@@ -10,7 +10,7 @@ db.users.insertOne({name: "John",  age: 30})
 ## Structure
 La structure d'une collection dans mongoDB est lousse, et même très lousse. Ce que je veux dire par la c'est qu'avec mongoDB nous ne devons pas définir de colonnes ou de type de donnée qui ira dans un document. Un document est un entité à part entière qui contient les données qui lui sont spécifié et le seul lien entre lui et les autre document est sa collection. 
 <br><br>
-Donc il n'y à aucune structure, contrairement aux tables de SGDB conventionnelles, il n'y à pas de moules dans lequel chaque enregistrement doit "fitter", les données sont lousse dans la collection et c'est bien comme ça.
+Donc il n'y à aucune structure, contrairement aux tables de SGDB conventionnelles, il n'y à pas de moules dans lequel chaque enregistrement doit "fitter", les données sont lousse dans la collection. Ceci signifie donc que on peut avoir des documents qui n'ont aucun champ en commun dans une même collection.
 <br><br>
 Additionnellement, une clef primaire, nommé "ObjectId", est associé à chaque document sans que nous aillons besoin de le spécifier. C'est comme ça par défaut.
 
