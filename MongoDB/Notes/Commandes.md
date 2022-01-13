@@ -16,12 +16,12 @@ Voici les commandes de bases et une description de ce qu'elle font :
 **Note** : Dans les sections suivante il se peut que je parle d'"objet" qui sont en fait des documents, je les nommes ainsi puisque leur syntaxe est exactement pareil à celle d'un objet JSON ou JS (comme précisé précédement dans la [section théorique](./Theorie.md#Syntaxe)).<br>
 ## Create
 Voici les commandes servant à la création de collections et de documents (en bref) :
-| Exemple de commande                                  | Description                                 |
-|------------------------------------------------------|---------------------------------------------|
-| `db.collection.insertOne({object})`                  | Insert un seul objet dans la collection.    |
-| `db.collection.insertMany([object, object, object])` | Insert plusieurs objets dans la collection. |
+| Exemple de commande                                  | Description                   |
+|------------------------------------------------------|-------------------------------|
+| `insertOne({object})`                  | Insert un seul objet dans la collection.    |
+| `insertMany([object, object, object])` | Insert plusieurs objets dans la collection. |
 
-**Note** : Veuillez remplacer "collection" par la collection appropriée dans votre cas et veuillez remplacer les occurences de "objet" par les objets nécéssaire.
+**NOTE IMPORTANTE** : Les commandes dans ce document-ci, présent sous vous merveilleux petits yeux, se doivent d'être écrite suivant la légende suivante : `db.<nomCollection>.<commande>` et veuillez remplacer les occurences de "objet" par les objets nécéssaire.
 <br><br>
 Lorsque l'on ajoute un document à une collection, un objet peux contenir plusieurs données (évidemment), des tableaux et d'autre objets. Voici un exemple qui fait exactement ces trois choses :
 
@@ -40,19 +40,19 @@ db.users.insertOne({
 ```
 ## Read
 Voici les commandes servant à la lecture de collections et de documents : 
-| Commandes                                             | Description                                                                                                                                                           |
-|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `db.collection.find()`                                | Affiche toutes les données.                                                                                                                                           |
-| `db.collection.countDocuments()`                      | Affiche le nombre de documents dans la collection.                                                                                                                    |
-| `db.collection.countDocuments({object})`              | Affiche le nombre de documents correspondant aux conditions indiqués dans l'objet.                                                                                    |
-| `db.collection.findOne()`                             | Affiche le premier document qui correspond à la recherche du `findOne()`.                                                                                             |
-| `db.collection.find().limit(n)`                       | Limite le résultat du `find()` à n résultat (n étant un nombre).                                                                                                      |
-| `db.collection.find().sort({data: 1 / -1})`           | Affiche le résultat du `find()` en ordre spécifier (1 = croissant / alphabétique, -1 = décroissant / alphabétique inversé) de la `data`.                              |
-| `db.collection.find().skip(n)`                        | Affiche le résultat du `find()` en ignorant n résultat (n étant un nombre).                                                                                           |
-| `db.collection.find({ data: value })`                 | Affiche le résultat du `find()` en filtrant avec un objet.                                                                                                            |
-| `db.collection.find({'object.data': value})`          | Affiche le résultat du `find()` en filtrant par le contenu d'un champ dans un objet d'un document. `'object.data'` est comme tout autre champ dans le document        | 
-| `db.collection.find({ data: value }, {data: 1 / 0 })` | Affiche le résultat du `find()` en filtrant avec un objet et en spécifiant quelles champs on veux des documents résultant du `find()` (1 = affiche, 0 = affiche pas). |
-| `db.collection.find({ data: filterObject })`          | Affiche le résultat du `find()` en filtrant avec un objet de filtre.                                                                                                  |
+| Commandes                               | Description                                                                                                                                                           |
+|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `find()`                                | Affiche toutes les données.                                                                                                                                           |
+| `countDocuments()`                      | Affiche le nombre de documents dans la collection.                                                                                                                    |
+| `countDocuments({object})`              | Affiche le nombre de documents correspondant aux conditions indiqués dans l'objet.                                                                                    |
+| `findOne()`                             | Affiche le premier document qui correspond à la recherche du `findOne()`.                                                                                             |
+| `find().limit(n)`                       | Limite le résultat du `find()` à n résultat (n étant un nombre).                                                                                                      |
+| `find().sort({data: 1 / -1})`           | Affiche le résultat du `find()` en ordre spécifier (1 = croissant / alphabétique, -1 = décroissant / alphabétique inversé) de la `data`.                              |
+| `find().skip(n)`                        | Affiche le résultat du `find()` en ignorant n résultat (n étant un nombre).                                                                                           |
+| `find({ data: value })`                 | Affiche le résultat du `find()` en filtrant avec un objet.                                                                                                            |
+| `find({'object.data': value})`          | Affiche le résultat du `find()` en filtrant par le contenu d'un champ dans un objet d'un document. `'object.data'` est comme tout autre champ dans le document        | 
+| `find({ data: value }, {data: 1 / 0 })` | Affiche le résultat du `find()` en filtrant avec un objet et en spécifiant quelles champs on veux des documents résultant du `find()` (1 = affiche, 0 = affiche pas). |
+| `find({ data: filterObject })`          | Affiche le résultat du `find()` en filtrant avec un objet de filtre.                                                                                                  |
 
 **Note** : Les fonctions peuvent être "stacker" une par dessus l'autre si nécéssaire.
 **Note 2** : Il est possible d'utiliser la fonction `sort()` avec plusieurs données (ce qui va trier les données dans l'ordre dans laquelle elles sont écrite).<br>
@@ -60,13 +60,21 @@ Voici les commandes servant à la lecture de collections et de documents :
 **Note 4** : Lorsque l'on filtre avec un objet **ET** que l'on spécifie les champs que l'on veux, si on spécifie juste un champ positivement (donc on veux qu'il nous le donne, on a mit un 1) **SEULEMENT** ce champ sera retourné. Dans le cas contraire, si on spécifie un champ négativement (donc on ne veux pas le champ, on a mit un 0) **SEULEMENT** ce champs sera ignoré (tout les autres seront présent). Finalement si nous mettons des deux type de modificateur de présence de champ (1 ou 0) il fera exactement cela, montrera ceux qui sont a 1 et par ceux qui sont à 0. De plus, 0 et 1 peuvent être remplacer par `false` et `true`.
 ## Update
 Voici les commandes servant à la mise à jour de documents :
-| Commandes                                                 | Description                                                                                                   |
-|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| `db.collection.updateOne({data: value}, modifierObject)`  | Modifie le premier document qui correspond à la recherche (premier paramètre) selon l'objet de mise à jour.   |
-| `db.collection.updateMany({data: value}, modifierObject)` | Modifie tous les documents qui correspondent à la recherche (premier paramètre) selon l'objet de mise à jour. |
+| Commandes                                   | Description                                                                                                   |
+|---------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| `updateOne({data: value}, modifierObject)`  | Modifie le premier document qui correspond à la recherche (premier paramètre) selon l'objet de mise à jour.   |
+| `updateMany({data: value}, modifierObject)` | Modifie tous les documents qui correspondent à la recherche (premier paramètre) selon l'objet de mise à jour. |
+| `replaceOne({data: value}, object)`         | Remplace le premier document qui correspond à la recherche (premier paramètre) par le second objet passé.     |
 
-**Note** : Lorsque l'on veux faire une mise à jour sur tout les documents, il suffit de faire un `updateMany()` avec le premier paramètre vide, comme ça : `db.collection.updateMany({}, modifierObject)`.
+**Note** : Lorsque l'on veux faire une mise à jour sur tout les documents, il suffit de faire un `updateMany()` avec le premier paramètre vide, comme ça : `db.<nomCollection>.updateMany({}, modifierObject)`.
 ## Delete
+**Note** : les commandes des opérations dans cette section fonctionnent **EXACTEMENT** comme le `find()` mais supprime ce qu'elle trouve au lieu de l'imprimer à l'écran.
+Voici les commandes servant à la suppression de documents :
+| Commandes                   | Description                                          |
+|-----------------------------|------------------------------------------------------|
+| `deleteOne({data: value})`  | Supprime le premier document qui match la recherche. |
+| `deleteMany({data: value})` | Supprime tous les documents qui match la recherche.  |
+
 ## Objet de mise à jour
 Voici les différents objets de mise à jour disponible avec mongoDB :
 | Objet de mise à jour         | Description                                                   |
@@ -78,6 +86,7 @@ Voici les différents objets de mise à jour disponible avec mongoDB :
 | `{$push: {data: value}}`     | Ajoute `value` au tableau `data`.                             |
 | `{$pull: {data: value}}`     | Enlève `value` au tableau `data`.                             |
 
+**Note** : Si on "push" sur un tableau qui n'existe pas, le tableau sera créer.
 ### Exemple d'usage d'objets de mise à jour
 Voici des exemples d'usage des objets de mise à jour :
 | Objet de mise à jour | Exemple                                                                                     | Description                                                                               |
