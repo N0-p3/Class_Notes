@@ -154,7 +154,7 @@ En bref :
 la fonction `on()` **OU** `addListener()` ajoute un listener à un évènement et la fonction `emit()` appel l'évènement passé en paramètre.
 
 ### Argument d'évènement
-Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant les données que vous voulez passer au "listener" et de le recevoir en ajoutant un paramêtre à la fonction qui écoute l'évènement. Comme ceci :
+Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant les données que vous voulez passer au "listener" et de le recevoir en ajoutant un paramètre à la fonction qui écoute l'évènement. Comme ceci :
 ```javascript
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
