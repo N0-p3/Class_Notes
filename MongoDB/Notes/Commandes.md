@@ -54,7 +54,7 @@ Voici les commandes servant à la lecture de collections et de documents :
 | `find({ data: value }, {data: 1 / 0 })` | Affiche le résultat du `find()` en filtrant avec un objet et en spécifiant quelles champs on veux des documents résultant du `find()` (1 = affiche, 0 = affiche pas). |
 | `find({ data: filterObject })`          | Affiche le résultat du `find()` en filtrant avec un objet de filtre.                                                                                                  |
 
-**Note** : Les fonctions peuvent être "stacker" une par dessus l'autre si nécéssaire.
+**Note** : Les fonctions peuvent être "stacker" une par dessus l'autre si nécéssaire.<br>
 **Note 2** : Il est possible d'utiliser la fonction `sort()` avec plusieurs données (ce qui va trier les données dans l'ordre dans laquelle elles sont écrite).<br>
 **Note 3** : Lorsque l'on filtre avec un objet, c'est comme si on demandais de nous sortir tout les objets qui on les données que nous y passons. <br>
 **Note 4** : Lorsque l'on filtre avec un objet **ET** que l'on spécifie les champs que l'on veux, si on spécifie juste un champ positivement (donc on veux qu'il nous le donne, on a mit un 1) **SEULEMENT** ce champ sera retourné. Dans le cas contraire, si on spécifie un champ négativement (donc on ne veux pas le champ, on a mit un 0) **SEULEMENT** ce champs sera ignoré (tout les autres seront présent). Finalement si nous mettons des deux type de modificateur de présence de champ (1 ou 0) il fera exactement cela, montrera ceux qui sont a 1 et par ceux qui sont à 0. De plus, 0 et 1 peuvent être remplacer par `false` et `true`.
