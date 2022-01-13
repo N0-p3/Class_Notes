@@ -60,14 +60,34 @@ Voici les commandes servant à la lecture de collections et de documents :
 **Note 4** : Lorsque l'on filtre avec un objet **ET** que l'on spécifie les champs que l'on veux, si on spécifie juste un champ positivement (donc on veux qu'il nous le donne, on a mit un 1) **SEULEMENT** ce champ sera retourné. Dans le cas contraire, si on spécifie un champ négativement (donc on ne veux pas le champ, on a mit un 0) **SEULEMENT** ce champs sera ignoré (tout les autres seront présent). Finalement si nous mettons des deux type de modificateur de présence de champ (1 ou 0) il fera exactement cela, montrera ceux qui sont a 1 et par ceux qui sont à 0. De plus, 0 et 1 peuvent être remplacer par `false` et `true`.
 ## Update
 Voici les commandes servant à la mise à jour de documents :
-| Commandes                                                      | Description                                                                                                                        |
-|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-|`db.collection.updateOne({data: value}, {$set: {data: value}})` | Modifie le premier document qui correspond à la recherche (premier paramètre) et change les champs spécifiés dans le `{$set: {}}`. |
+| Commandes                                                 | Description                                                                                                   |
+|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| `db.collection.updateOne({data: value}, modifierObject)`  | Modifie le premier document qui correspond à la recherche (premier paramètre) selon l'objet de mise à jour.   |
+| `db.collection.updateMany({data: value}, modifierObject)` | Modifie tous les documents qui correspondent à la recherche (premier paramètre) selon l'objet de mise à jour. |
 
-
+**Note** : Lorsque l'on veux faire une mise à jour sur tout les documents, il suffit de faire un `updateMany()` avec le premier paramètre vide, comme ça : `db.collection.updateMany({}, modifierObject)`.
 ## Delete
 ## Objet de mise à jour
 Voici les différents objets de mise à jour disponible avec mongoDB :
+| Objet de mise à jour         | Description                                                   |
+|------------------------------|---------------------------------------------------------------|
+| `{$set: {data: value}}`      | Met à jour les champs passés à l'objet de mise à jour.        |
+| `{$inc: {data: value}}`      | Incrémente le champ numérique `data` de la valeur de `value`. |
+| `{$rename: {data: 'value'}}` | Renomme le nom du champ `data` pour `value`.                  |
+| `{$unset: {data: ''}}`       | Enlève le champ `data` du document.                           |
+| `{$push: {data: value}}`     | Ajoute `value` au tableau `data`.                             |
+| `{$pull: {data: value}}`     | Enlève `value` au tableau `data`.                             |
+
+### Exemple d'usage d'objets de mise à jour
+Voici des exemples d'usage des objets de mise à jour :
+| Objet de mise à jour | Exemple                                                                                     | Description                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `$set`               | `db.users.updateOne({_id: ObjectId('61df7434aa581c6f1eabc480')}, {$set: {name: 'Robert'}})` | Change le champ `name` du document dont l'id est '61df7434aa581c6f1eabc480' pour 'Robert' |
+| `$inc`               | `db.users.updateOne({age: 12}, {$inc: {age: 2}})`                                           | Incrémente le champ `age` de la valeur de 2 pour le premier document trouvé.              |
+| `$rename`            | `db.users.updateMany({}, {$rename: {age: 'level'}})`                                        | Renomme le nom du champ `age` pour 'level' pour tout les documents.                       |
+| `$unset`             | `db.users.updateOne({age: 12}, {$unset: {age: ''}})`                                        | Enlève le champ `age` du premier document trouvé.                                         |
+| `$push`              | `db.users.updateMany({}, {$push: {friends: 'George'}})`                                     | Ajoute 'George' au tableau `friends` pour tout les utilisateurs.                          |
+| `$pull`              | `db.users.updateMany({}, {$pull: {friends: 'Nathaniel'}})`                                  | Enlève 'Nathaniel' au tableau `friends` pour tout les utilisateurs.                       |
 
 ## Objet de filtre
 Voici les différents objets de filtres disponible avec mongoDB :
