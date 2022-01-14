@@ -1,4 +1,11 @@
 # Table des matières
+- [**Théorie**](Notes/Theorie.md)
+  - [Installation](Notes/Theorie.md#installation)
+    - [Windows](Notes/Theorie.md#windows)
+    - [Linux](Notes/Theorie.md#linux)
+  - [Possibles erreurs à l'installation](Notes/Theorie.md#possibles-erreurs-à-linstallation)
+  - [Qu'est-ce que Node.js](Notes/Theorie.md#quest-ce-que-nodejs)
+    - [Résumer](Notes/Theorie.md#résumer)
 - [**Bases**](Notes/Bases.md)
   - [Données et déclaration](Notes/Bases.md#données-et-déclaration)
     - [Variables](Notes/Bases.md#variables)
