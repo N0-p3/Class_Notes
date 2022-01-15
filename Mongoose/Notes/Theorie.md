@@ -29,3 +29,11 @@ Afin d'installer Mongoose, assurez vous d'avoir MongoDB, mongosh et Node.js d'in
 ``` 
 7. (**OPTIONNELLEMENT**) Changer `test.js` pour le nom de votre fichier javascript
 **Note** : Pour rouler votre code à l'avenir, utilisé la commande `npm run project` (ce qui va exécuter la commande que vous venez de mettre dans votre fichier `package.json`). Comme vous vous en doutez, oui vous pouvez changer "project" pour ce que vous voulez.
+## Terminologie
+Voici les termes utilisé avec mongoose ainsi que leur description : 
+| Mot     | Description                            |
+|---------|----------------------------------------|
+| Schéma  | Définit la structure d'une collection. |
+| Modèle  | Un objet (document) de la collection.  |
+| Requête | Une requête fait à la base de données. |
+
