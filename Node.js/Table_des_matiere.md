@@ -1,5 +1,5 @@
 # Table des matières
-- [**Théorie**](Notes/Theorie.md)
+- [**Théorie**](Notes/Theorie.md#theorie)
   - [Installation](Notes/Theorie.md#installation)
     - [Windows](Notes/Theorie.md#windows)
     - [Linux](Notes/Theorie.md#linux)

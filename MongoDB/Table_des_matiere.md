@@ -1,9 +1,13 @@
 # Table des matières
-- [**Théorie**](Notes/Theorie.md#théorie)
+- [**Théorie**](Notes/Theorie.md#theorie)
   - [Définition Générale](Notes/Theorie.md#définition-générale)
   - [Syntaxe](Notes/Theorie.md#syntaxe)
   - [Structure](Notes/Theorie.md#structure)
   - [Terminologie](Notes/Theorie.md#terminologie)
+  - [Installation](Notes/Theorie.md#installation)
+    - [Windows](Notes/Theorie.md#windows)
+    - [Linux](Notes/Theorie.md#Linux)
+      - [Ubuntu](Notes/Theorie.md#ubuntu)
 
 - [**Commandes**](Notes/Commandes.md#commandes)
   - [Commandes de bases](Notes/Commandes.md#commandes-de-bases)

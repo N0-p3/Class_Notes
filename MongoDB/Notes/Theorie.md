@@ -22,3 +22,23 @@ Voici la liste des termes utilisé dans le SGBD mongoDB :
 | Collection    | Un groupe de document dans une base de donné (Table).              |
 | Document      | Un enregistrement à l'intérieur d'une collection (Enregistrement). |
 | Champ         | Une donné dans un document (Colonne).                              |
+## Installation
+Afin d'installer mongoDB et de pouvoir jouer avec ce merveilleux SGBD, il va nous falloir deux choses : MongoDB et mongosh. MongoDB est l'engin relationnel, toute la patente de BD, de MongoDB et mongosh est un programme console qui permet d'intéragir avec MongoDB. Je vous conseil fortement d'aller vous même voir sur le site officiel de MongoDB puisque les informations ici sont très minime.
+Voici le lien pour [MongoDB](https://docs.mongodb.com/manual/installation/) et pour [mongosh](https://docs.mongodb.com/mongodb-shell/install/)
+### Windows
+Pour l'installation sous Windows, le tout est infiniement simple : 
+1. Dirigez vous sur le site web de documentation de [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/).
+2. Téléchargez l'[installateur](https://www.mongodb.com/try/download/community?tck=docs_server&_ga=2.101412997.507167780.1642204555-631246763.1641858718) de mongoDB.
+3. Exécuter et suivez les étapes de l'installateur.
+4. Téléchargez l'[installateur](https://www.mongodb.com/try/download/shell?jmp=docs&_ga=2.130192651.507167780.1642204555-631246763.1641858718) de mongosh.
+5. Exécuter et suivez les étapes de l'installateur.
+### Linux 
+Pour l'installation sous Linux :
+1. Dirigez vous sur le site web de document de [MongoDB](https://docs.mongodb.com/manual/installation/) (ce lien est différent que celui de Windows).
+2. Sélectionnez votre distribution dans la table en haut de page.
+3. Suivez les étapes indiqués.
+#### Ubuntu
+1. Importer la clef publique GPG de MongoDB : `wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -`.
+2. Créer le fichier liste pour MongoDB : `echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list`
+3. Recharger la base de donnée local des paquets : `sudo apt update`
+4. Installer MongoDB et mongosh : `sudo apt install -y mongodb-org mongodb-mongosh`
