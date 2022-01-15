@@ -194,7 +194,16 @@ switch(expression) {
         //code
 } 
 ```
+### Try / catch
+Le try / catch sert à la gestion d'erreur dans un bout de code qui pourrait potentiellement planter. Si javascript rencontre une erreure peu importe où (dans le try), peu importe comment, javascript exécutera le code dans le catch. La syntaxe du try / catch va comme suit : 
 
+```javascript
+try {
+    //code
+} catch (error) {
+    //code
+}
+```
 ## Boucles
 ### For
 La syntaxe du `for` va comme suit :
@@ -274,7 +283,8 @@ let sum = (a, b) => a + b;
 <br>
 **Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal. 
 <br>
-**Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie. (Ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris)
+**Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie (ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris).
+
 ### Fonctions flèches anonymes
 Effectivement, les fonctions flèches sont surtout utile lorsque nous devons faire des fonctions anonymes. Voici l'exemple d'un peu plus haut en fonction flèche anonyme :
 
@@ -284,3 +294,55 @@ setTimeout(() => {
 }, 1000);
 ```
 **Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
+## Promesses
+Les promesses en javascript sont des objets qui, tout comme une promesse dans la vraie vie, promet de faire quelque chose lorsque quelque chose d'autre est terminer. C'est comme si le code disait : "Jte promet dude que j'va exécuter ste fonction là si toute la patente marche. J'te le jure!". La magie la dedans c'est que on peux lui dire de faire quelque chose après une action qui peux prendre beaucoup de temps comme un téléchargement ou une requête à un API. De plus, il est possible de passé du stock (variables, objets, tableau, you name it) d'une promesse à la fonction qu'elle doit exécuter tout dépendament si elle se résolue (succès) ou si elle échoue. Donc, voyons un exemple (avec syntaxe pédagogique) d'une promesse : 
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+    let foo = 1 + 1;
+    if (foo === 2) {
+        resolve('Succès!');
+    } else {
+        reject('Échec!');
+    }
+});
+
+promise.then((message) => {
+    console.log(`Ceci est exécuter dans le then, puisque la promèsse fut résolue. Message : ${message}`);
+}).catch((message) => {
+    console.log(`Ceci est exécuter dans le catch, puisque la promèsse à échoué. Message : ${message}`);
+});
+```
+**Explication** : Donc en gros ici, on décrit notre promesse en y passant une fonction flèche anonyme (remarqué que la fonction dans la promesse prend deux paramètres, `resolve` et `reject` qui sont les fonctions qu'on va appelés plus tard, vous pouvez les nommer comme bon vous semble) et si le résultat est bon on appel la méthode `resolve()` avec un message et dans le cas contraire on appel la méthode `reject()` avec un autre message! <br><br>
+Suite à la description de notre promesse, on décris sont agissement dépendant de quelle fonction notre promesse va appeler (donc si il y à succès ou échec) une fois que son exécution est terminer (dans le `promise.then().catch()`). Dans le `then()` on passe une autre fonction flèche anonyme qui elle reçoit le paramètre du `resolve()` et dans cette fonction on décris ce que l'on veux faire si la promèsse est un succès (et inversement, dans le `catch()` on décris ce que l'on veux faire si la promèsse échoue). <br><br>
+**Note** : Il aurait été possible d'écrire le `.then()` immédiatement après la définition de la promesse mais comme préciser précédemment, j'ai préférer utiliser une syntaxe pédagogique par souçis de compréhension.
+### Fonctions async / await
+Les fonctions "async / await" sont une meilleure façon d'écrire des promesses ou de travailler avec des promesses, la syntaxe fait plus de sens au lecteur et elle est aussi plus plaisante à écrire. Maintenant, nous allons améliorer syntaxiquement la promesse précédante! : 
+
+```javascript
+function makePromise() {
+    return promise = new Promise((resolve, reject) => {
+        let foo = 1 + 1;
+        if (foo === 3) {
+            resolve('Succès!');
+        } else {
+            reject('Échec!');
+        }
+    });
+}
+
+async function doStuff() {
+    try {
+        const message = await makePromise();
+        console.log(`Ceci est exécuter dans le then, puisque la promèsse fut résolue. Message : ${message}`);
+    } catch (errorMessage) {
+        console.log(`Ceci est exécuter dans le catch, puisque la promèsse à échoué. Message : ${errorMessage}`);
+    } 
+}
+
+doStuff();
+```
+**Note** : Veuilliez noter que j'ai entouré ma promesse dans une fonction qui la retourne par souçi de beauté, normallement ce n'est même pas nous qui vons faire les promesses mais c'est nous qui allons les recevoir. Tout ça pour dire que ma promesse est entouré par une fonction qui la retourne mais ne vous en faite pas pour ce bout la tant que vous comprenez! <br><br>
+**Explication** : On à remplacer notre `.then()` par une fonction qui elle est définit avec le mot `async` ce qui dit à javascript : "Exécute ça sur un autre thread (parce que tu va devoir attendre)". Par la suite, on reçoit le retour de notre promesse que l'on stocke dans une variable `message` en utilisant le mot clef `await`. C'est donc à cette ligne que notre code va attendre et lorsque la promesse est terminée, il va éxécuter la ligne suivante, pas avant! <br><br> Bien sûr si une erreur occure, on tombera alors dans le catch!<br><br>
+**Note 2** : Ce type de syntaxe pour les promesses devient particulièrement plus intéressante lorsque nous devons travailler avec des promesses l'une dans l'autre ce qui provoque des `.then()` sur des `.then()` sur des `.then()` et ainsi de suite. <br>
+**Note 3** : N'oubliez pas d'appeler votre fonction async sinon rien ne va se passer!

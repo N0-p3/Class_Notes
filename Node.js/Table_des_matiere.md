@@ -5,7 +5,8 @@
     - [Linux](Notes/Theorie.md#linux)
   - [Possibles erreurs à l'installation](Notes/Theorie.md#possibles-erreurs-à-linstallation)
   - [Qu'est-ce que Node.js](Notes/Theorie.md#quest-ce-que-nodejs)
-    - [Résumer](Notes/Theorie.md#résumer)
+    - [Résumer](Notes/Theorie.md#résumer)<br><br>
+
 - [**Bases**](Notes/Bases.md)
   - [Données et déclaration](Notes/Bases.md#données-et-déclaration)
     - [Variables](Notes/Bases.md#variables)
@@ -19,6 +20,7 @@
     - [If](Notes/Bases.md#if)
     - [Inline if](Notes/Bases.md#inline-if)
     - [Switch](Notes/Bases.md#switch)
+    - [Try / catch](Notes/Bases.md#try--catch)
   - [Boucles](Notes/Bases.md#boucles)
     - [For](Notes/Bases.md#for)
     - [While](Notes/Bases.md#while)
@@ -28,15 +30,16 @@
   - [Fonctions anonymes](Notes/Bases.md#fonctions-anonymes)
   - [Fonctions flèches](Notes/Bases.md#fonctions-flèches)
     - [Fonctions flèches anonymes](Notes/Bases.md#fonctions-flèches-anonymes)
-  - [Possibles erreurs à l'installation](Notes/Bases.md#possibles-erreurs-a-l'installation)
-  <br><br>
+  - [Promesses](Notes/Bases.md#promesses)
+    - [Fonctions async / await](Notes/Bases.md#fonctions-async--await)<br><br>
+
 - [**Affichage à la console**](Notes/Affichage_a_la_console.md)
   - [Litéraux de modèle (template literals)](Notes/Affichage_a_la_console.md#litéraux-de-modèle-template-literals)
   - [Afficher le nom des variables](Notes/Affichage_a_la_console.md#afficher-le-nom-des-variables)
   - [Afficher les données sous forme de table](Notes/Affichage_a_la_console.md#afficher-les-données-sous-forme-de-table)
   - [Afficher le temps à la console](Notes/Affichage_a_la_console.md#afficher-le-temps-à-la-console)
-  - [Afficher une trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)
-  <br><br>
+  - [Afficher une trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)<br><br>
+
 - [**Modules**](Notes/Modules.md#modules)
   - [Théorie](Notes/Modules.md#théorie)
   - [Création d'un module (sous forme d'objet)](Notes/Modules.md#création-dun-module-sous-forme-dobjet)
@@ -48,6 +51,4 @@
   - [Module File System](Notes/Modules.md#module-file-system)
   - [Module Event](Notes/Modules.md#module-event)
     - [Argument d'évènement](Notes/Modules.md#argument-dévènement)
-  - [Module HTTP](Notes/Modules.md#module-http) 
-  <br><br>
-
+  - [Module HTTP](Notes/Modules.md#module-http) <br><br>
