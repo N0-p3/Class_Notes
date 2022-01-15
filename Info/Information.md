@@ -5,8 +5,10 @@ Prenez en note que les sujets ici présents ne sont pas en ordre dans lesquels j
 - Node.js
   - Async/Await
 - TypeScript
+- SCSS
 - Flutter
 - Dart
+- React
   
 # En cours
 Cette section sera mise à jour au fur et à mesure que je travail sur les notes et cette dernière indiquera sur quel sujet(s) je fait des notes en ce moment.
