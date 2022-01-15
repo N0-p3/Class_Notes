@@ -42,3 +42,5 @@ Pour l'installation sous Linux :
 2. Créer le fichier liste pour MongoDB : `echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list`
 3. Recharger la base de donnée local des paquets : `sudo apt update`
 4. Installer MongoDB et mongosh : `sudo apt install -y mongodb-org mongodb-mongosh`
+## Lancer le service
+Afin de lancer le service sous Linux, exécutez : `sudo systemctl start mongod`.
