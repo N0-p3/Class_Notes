@@ -45,7 +45,8 @@ const user = new User({name: 'Bob', age: 2}); //Utilisation
 ```
 ## Modèle
 Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
-### Sauvegarde d'un modèle
+### Création d'un modèle
+#### Multi-étape
 Pour sauvegarder les modèles dans votre BD Mongo, il suffit d'appeler la méthode `save()` de votre modèle précédemment créer. Il est aussi possible, vue que `save()` est une fonction async, d'exécuter une fonction `then()` par dessus la fonction `save()` pour ensuite lui passer une fonction pour décrire ce que l'on veux qu'elle fasse une fois que le modèle est sauvegardé dans la BD. En voici un exemple : 
 ```javascript
 const mongoose = require('mongoose');
@@ -76,4 +77,38 @@ async function makeOneUserAndSave() {
     console.log(`user ${user.name} saved\n`);
 } 
 ```
-**Note** : La magie la dedans (parce que oui il y à de la magie une peu partout) est que, tout comme mongosh, tant que rien n'est sauvegarder dans une BD, la BD n'existe pas. Ce principe s'applique aussi ici, sauf qu'il s'applique sur le collections ET sur les BD. Donc mongoose s'occupe de créer une collection pour vous pour chaque schéma ET EN PLUS il la renomme pour qu'elle soit au pluriel (pour les noms en anglais dans tout les cas). N'est-ce pas merveilleux?
+**Note** : La magie la dedans (parce que oui il y à de la magie une peu partout) est que, tout comme mongosh, tant que rien n'est sauvegarder dans une BD, la BD n'existe pas. Ce principe s'applique aussi ici, sauf qu'il s'applique sur le collections ET sur les BD. Donc mongoose s'occupe de créer une collection pour vous pour chaque schéma ET EN PLUS il la renomme pour qu'elle soit au pluriel (pour les noms en anglais dans tout les cas). N'est-ce pas merveilleux? <br>
+**Note 2** : Vous allez remarquer que dans votre BD, il va y avoir une donnée que vous n'avez pas spécifier mais qui est là pour chaque document. Le `__v`, tout ce que vous devez savoir c'est que c'est mongoose qui à ajouter cette donnée. <br>
+#### Singulière
+Si vous souhaitez créer un instance de votre modèle et la sauvegarder en une seule étape, une alternative s'offre à vous et elle fait la même chose que le code dans la métode précédente. Pour ce faire, nous allons utilisé la méthode `create()` de mongoose ainsi : 
+```javascript
+const mongoose = require('mongoose');
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+makeOneUserAndSave()
+
+async function makeOneUserAndSave() {
+    const user = await User.create({name: 'Bob', age: 2})
+    console.log(`user ${user.name} saved\n`);
+} 
+```
+### Mise à jour d'un modèle
+Afin de mettre à jour un modèle, il suffit d'apporter les modifications nécéssaire à votre modèle en local et ainsi de re-appeler la méthode `save()` de votre modèle ainsi :
+```javascript
+const mongoose = require('mongoose');
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+makeOneUserAndSave()
+
+async function makeOneUserAndSave() {
+    const user = await User.create({name: 'Bob', age: 2})
+    user.name = 'yeet'; //Modification
+    await user.save();  //Re-sauvegarde
+    console.log(`user ${user.name} saved\n`);
+} 
+
+```
