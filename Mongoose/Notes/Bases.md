@@ -110,5 +110,4 @@ async function makeOneUserAndSave() {
     await user.save();  //Re-sauvegarde
     console.log(`user ${user.name} saved\n`);
 } 
-
 ```
