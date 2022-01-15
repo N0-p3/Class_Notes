@@ -43,6 +43,7 @@ mongoose.connect('mongodb://localhost/testdb');
 
 const user = new User({name: 'Bob', age: 2}); //Utilisation
 ```
+**Note 2** : Remarquez qu'appartir de `User`, nous avons non seulement un modèle mais aussi la collection `users` dans notre base de donnée, puisque à partir de `User`, nous avons toutes les fonctions (de mongosh) comme `find()`, `findOne()` et etc.
 ## Modèle
 Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
 ### Création d'un modèle
@@ -111,3 +112,51 @@ async function makeOneUserAndSave() {
     console.log(`user ${user.name} saved\n`);
 } 
 ```
+### Architecture de schéma
+Dans un schéma, les données peuvent être architecturées vraiment comme on le souhaite. On peux avoir des reférences à d'autres modèles (un peu comme des clefs secondaires), on peux avoir des tableaux de données, bref tout ce que vous avez vue qu'on peux faire avec mongosh on peux le faire avec mongoose mais en mieux! (c'est plus "clean" avec les schémas). En voici un exemple : 
+```javascript
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    hobbies: [String],
+    birthday: Date,
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    favoriteThings: [],
+    address: {
+        zipCode: String,
+        number: Number,
+        street: String,
+        city: String
+    }
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
+Maintenant dans notre schéma `User` nous avons un tableau typé (`hobbies`), un tableau non typé qui peux contenir tout types confondues (`favoriteThings`), une date (`birthday`), une référence à un autre modèle (`bestFriend`) et un autre schéma (`address`)!<br><br>
+Cependant, il serait plus propre de prendre notre objet `address` et de la mettre dans son propre schéma (et idéalement dans son propre fichier)! Ainsi :
+```javascript
+const mongoose = require('mongoose');
+
+const addressSchema = new mongoose.Schema({
+    zipCode: String,
+    number: Number,
+    street: String,
+    city: String
+});
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    hobbies: [String],
+    birthday: Date,
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    favoriteThings: [],
+    address: addressSchema
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
+**Note** : Ainsi (en mettant l'addresse dans un autre schéma), mongoDB va créer une clef pour cet objet en plus des données fourni à l'intérieur. Un peu comme si l'addresse était une chose à part et donc qu'elle avait sa propre identité à part.<br><br>
+Pour ce qui est de travailler avec ce schéma c'est comme avant sauf qu'il y à maintenant plus de données dans votre modèle à créer et chacun d'entre eux doit contenir le bon type.
