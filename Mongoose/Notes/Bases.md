@@ -44,74 +44,6 @@ mongoose.connect('mongodb://localhost/testdb');
 const user = new User({name: 'Bob', age: 2}); //Utilisation
 ```
 **Note 2** : Remarquez qu'appartir de `User`, nous avons non seulement un modèle mais aussi la collection `users` dans notre base de donnée, puisque à partir de `User`, nous avons toutes les fonctions (de mongosh) comme `find()`, `findOne()` et etc.
-## Modèle
-Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
-### Création d'un modèle
-#### Multi-étape
-Pour sauvegarder les modèles dans votre BD Mongo, il suffit d'appeler la méthode `save()` de votre modèle précédemment créer. Il est aussi possible, vue que `save()` est une fonction async, d'exécuter une fonction `then()` par dessus la fonction `save()` pour ensuite lui passer une fonction pour décrire ce que l'on veux qu'elle fasse une fois que le modèle est sauvegardé dans la BD. En voici un exemple : 
-```javascript
-const mongoose = require('mongoose');
-
-const User = require('./User'); //Importation
-
-mongoose.connect('mongodb://localhost/testdb');
-
-const user = new User({name: 'Bob', age: 2}); //Création
-
-//Sauvegarde
-user.save().then(() => {
-    console.log(`user : ${user.name} saved\n`)
-}); 
-```
-Si vous préférez la syntaxe avec async await, vous pouvez l'utilisé : 
-```javascript
-const mongoose = require('mongoose');
-const User = require('./User'); //Importation
-
-mongoose.connect('mongodb://localhost/testdb');
-
-makeOneUserAndSave()
-
-async function makeOneUserAndSave() {
-    const user = new User({name: 'Bob', age: 2});    //Création
-    await user.save();                              //Sauvegarde
-    console.log(`user ${user.name} saved\n`);
-} 
-```
-**Note** : La magie la dedans (parce que oui il y à de la magie une peu partout) est que, tout comme mongosh, tant que rien n'est sauvegarder dans une BD, la BD n'existe pas. Ce principe s'applique aussi ici, sauf qu'il s'applique sur le collections ET sur les BD. Donc mongoose s'occupe de créer une collection pour vous pour chaque schéma ET EN PLUS il la renomme pour qu'elle soit au pluriel (pour les noms en anglais dans tout les cas). N'est-ce pas merveilleux? <br>
-**Note 2** : Vous allez remarquer que dans votre BD, il va y avoir une donnée que vous n'avez pas spécifier mais qui est là pour chaque document. Le `__v`, tout ce que vous devez savoir c'est que c'est mongoose qui à ajouter cette donnée. <br>
-#### Singulière
-Si vous souhaitez créer un instance de votre modèle et la sauvegarder en une seule étape, une alternative s'offre à vous et elle fait la même chose que le code dans la métode précédente. Pour ce faire, nous allons utilisé la méthode `create()` de mongoose ainsi : 
-```javascript
-const mongoose = require('mongoose');
-const User = require('./User'); //Importation
-
-mongoose.connect('mongodb://localhost/testdb');
-
-makeOneUserAndSave()
-
-async function makeOneUserAndSave() {
-    const user = await User.create({name: 'Bob', age: 2})
-    console.log(`user ${user.name} saved\n`);
-} 
-```
-### Mise à jour d'un modèle
-Afin de mettre à jour un modèle, il suffit d'apporter les modifications nécéssaire à votre modèle en local et ainsi de re-appeler la méthode `save()` de votre modèle ainsi :
-```javascript
-const mongoose = require('mongoose');
-const User = require('./User'); //Importation
-
-mongoose.connect('mongodb://localhost/testdb');
-
-makeOneUserAndSave()
-
-async function makeOneUserAndSave() {
-    const user = await User.create({name: 'Bob', age: 2})
-    user.name = 'yeet'; //Modification
-    await user.save();  //Re-sauvegarde
-    console.log(`user ${user.name} saved\n`);
-} 
-```
 ### Architecture de schéma
 Dans un schéma, les données peuvent être architecturées vraiment comme on le souhaite. On peux avoir des reférences à d'autres modèles (un peu comme des clefs secondaires), on peux avoir des tableaux de données, bref tout ce que vous avez vue qu'on peux faire avec mongosh on peux le faire avec mongoose mais en mieux! (c'est plus "clean" avec les schémas). En voici un exemple : 
 ```javascript
@@ -160,3 +92,133 @@ module.exports = mongoose.model('User', userSchema);
 ```
 **Note** : Ainsi (en mettant l'addresse dans un autre schéma), mongoDB va créer une clef pour cet objet en plus des données fourni à l'intérieur. Un peu comme si l'addresse était une chose à part et donc qu'elle avait sa propre identité à part.<br><br>
 Pour ce qui est de travailler avec ce schéma c'est comme avant sauf qu'il y à maintenant plus de données dans votre modèle à créer et chacun d'entre eux doit contenir le bon type.
+### Validation de schéma
+Afin de validé qu'un champ est requis ou qu'il doit être conforme à certaines règles, un validation du schéma s'impose. Celle-ci est relativement simple, il suffit de transformer une donné en un objet dans notre schéma, de décrire son type et ensuite de décrire la validation que nous voullons y faire à l'aide des différents validateurs.
+#### Liste de validateurs
+Voici la liste des validateurs ainsi que leur type associé (puisque certain validateur ne va pas avec certain type de données) : 
+| Validateur | Types applicables | Valeur du validateur | Description                                                                        |
+|------------|-------------------|----------------------|------------------------------------------------------------------------------------|
+| required   | Tous              | Bool                 | Indique que le champ doit être remplit.                                            |
+| default    | Tous              | Valeur               | Indique une valeur par défaut.                                                     |
+| immutable  | Tous              | Bool                 | Indique que le champ, une fois qu'une valeur y est attribué, ne peut être modifié. |
+| lowercase  | String            | Bool                 | Appel la méthode `toLowerCase()` sur le champ.                                     |
+| uppercase  | String            | Bool                 | Appel la méthode `toUpperCase()` sur le champ.                                     |
+| trim       | String            | Bool                 | Appel la méthode `trim()` sur le champ.                                            |
+| match      | String            | Regex                | Vérifie si la string match avec le Regex donné.                                    |
+| minLength  | String            | Number               | Vérifie si la string est plus longue que le nombre donné.                          |
+| maxLength  | String            | Number               | Vérifie si la string est plus petite que le nombre donné.                          |
+| enum       | String, Number    | Tableau, Number      | Vérifie si la valeur du champ est dans le tableau donné.                           |
+| min        | Number, Date      | Number, Date         | Vérifie si la valeur du champ est plus grande que la valeur donné.                 |
+| max        | Number, Date      | Number, Date         | Vérifie si la valeur du champ est plus petite que la valeur donné.                 |
+
+#### Exemple
+Voici un exemple de validation : 
+
+```javascript
+const mongoose = require('mongoose');
+
+const addressSchema = new mongoose.Schema({
+    zipCode: String,
+    number: Number,
+    street: String,
+    city: String
+});
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        default: 'Unnamed',
+        unique: true
+    },
+    age: {
+        type: Number,
+        min: 0,
+        max: 125
+    },
+    hobbies: [String],
+    birthday: {
+        type: Date,
+        immutable: true
+    },
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    favoriteThings: [],
+    address: {
+        type: addressSchema,
+        required: true
+    }
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
+**Note** : Veuillez noter que `unique` n'est pas un validateur, celui-ci créer un indexe unique pour ce champ (je suis pas sur d'avoir compris mais c'est pas un validateur plus d'information [ici](https://masteringjs.io/tutorials/mongoose/unique).
+#### Validation personnalisé 
+Parfois il pourrait être utile de faire ses propres validateurs et mongoose permet de faire ça! Simplement en ajoutant un champ `validate` à votre YEET
+## Modèle
+Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
+### Création d'un modèle
+#### Multi-étape
+Pour sauvegarder les modèles dans votre BD Mongo, il suffit d'appeler la méthode `save()` de votre modèle précédemment créer. Il est aussi possible, vue que `save()` est une fonction async, d'exécuter une fonction `then()` par dessus la fonction `save()` pour ensuite lui passer une fonction pour décrire ce que l'on veux qu'elle fasse une fois que le modèle est sauvegardé dans la BD. En voici un exemple : 
+```javascript
+const mongoose = require('mongoose');
+
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+const user = new User({name: 'Bob', age: 2}); //Création
+
+//Sauvegarde
+user.save().then(() => {
+    console.log(`user : ${user.name} saved\n`)
+}); 
+```
+Si vous préférez la syntaxe avec async await, vous pouvez l'utilisé : 
+```javascript
+const mongoose = require('mongoose');
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+makeOneUserAndSave()
+
+async function makeOneUserAndSave() {
+    const user = new User({name: 'Bob', age: 2});    //Création
+    await user.save();                              //Sauvegarde
+    console.log(`user ${user.name} saved\n`);
+} 
+```
+**Note** : La magie la dedans (parce que oui il y à de la magie une peu partout) est que, tout comme mongosh, tant que rien n'est sauvegarder dans une BD, la BD n'existe pas. Ce principe s'applique aussi ici, sauf qu'il s'applique sur le collections ET sur les BD. Donc mongoose s'occupe de créer une collection pour vous pour chaque schéma ET EN PLUS il la renomme pour qu'elle soit au pluriel (pour les noms en anglais dans tout les cas). N'est-ce pas merveilleux? <br>
+**Note 2** : Vous allez remarquer que dans votre BD, il va y avoir une donnée que vous n'avez pas spécifier mais qui est là pour chaque document. Le `__v`, tout ce que vous devez savoir c'est que c'est mongoose qui à ajouter cette donnée. <br>
+**Note 3** : Il serait plus poli de mettre tout ce qui et création, altération et suppression de données dans un try catch si jamais il y à une erreure.
+#### Singulière
+Si vous souhaitez créer un instance de votre modèle et la sauvegarder en une seule étape, une alternative s'offre à vous et elle fait la même chose que le code dans la métode précédente. Pour ce faire, nous allons utilisé la méthode `create()` de mongoose ainsi : 
+```javascript
+const mongoose = require('mongoose');
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+makeOneUserAndSave()
+
+async function makeOneUserAndSave() {
+    const user = await User.create({name: 'Bob', age: 2});
+    console.log(`user ${user.name} saved\n`);
+} 
+```
+### Mise à jour d'un modèle
+Afin de mettre à jour un modèle, il suffit d'apporter les modifications nécéssaire à votre modèle en local et ainsi de re-appeler la méthode `save()` de votre modèle ainsi :
+```javascript
+const mongoose = require('mongoose');
+const User = require('./User'); //Importation
+
+mongoose.connect('mongodb://localhost/testdb');
+
+makeOneUserAndSave()
+
+async function makeOneUserAndSave() {
+    const user = await User.create({name: 'Bob', age: 2});
+    user.name = 'yeet'; //Modification
+    await user.save();  //Re-sauvegarde
+    console.log(`user ${user.name} saved\n`);
+} 
+```
