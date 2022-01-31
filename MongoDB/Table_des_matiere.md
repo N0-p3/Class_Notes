@@ -1,5 +1,5 @@
 # Table des matières
-- [**Théorie**](Notes/Theorie.md#theorie)
+- [**Théorie**](Notes/Theorie.md)
   - [Définition Générale](Notes/Theorie.md#définition-générale)
   - [Syntaxe](Notes/Theorie.md#syntaxe)
   - [Structure](Notes/Theorie.md#structure)
@@ -10,7 +10,7 @@
       - [Ubuntu](Notes/Theorie.md#ubuntu)
   - [Lancer le service](Notes/Theorie.md#lancer-le-service)
 
-- [**Commandes**](Notes/Commandes.md#commandes)
+- [**Commandes**](Notes/Commandes.md)
   - [Commandes de bases](Notes/Commandes.md#commandes-de-bases)
   - [Create](Notes/Commandes.md#create)
   - [Read](Notes/Commandes.md#read)

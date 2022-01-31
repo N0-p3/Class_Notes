@@ -1,6 +1,18 @@
-# Bases
-## Données et déclaration
-### Variables
+<style>
+    .title{
+        font-size: 37px;
+        text-align: center;
+        border-bottom: solid rgb(143, 143, 143);
+        border-width:2px;
+    }
+</style>
+
+<p class="title"> Bases </p>
+
+# Données et déclaration
+
+## Variables
+
 `let` est utilisé pour créer des variables de tout types et `const` est utilisé pour créer des constantes de tout types, les deux s'utilisent de la façon suivante : 
 
 ```javascript
@@ -16,7 +28,9 @@ Les déclarations peuvent aussi être séparés par des virgules pour être sur 
 ```javascript
 let g = 'Geofroy', h = true, i = 480;
 ```
-### Tableaux
+
+## Tableaux
+
 On utilise tout le temps `const` puisque un tableau est en théorie immuable, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
 
 ```javascript
@@ -47,7 +61,9 @@ const chiffres2 = new Array(40);
 | length    | Retourne la longueur du tableau.                   |
 
 **Note 3** : On peut mettre tout type de données **CONFONDUES** dans un tableau incluant des objets et des fonctions (apparement).
-#### Syntaxe étendue (spread syntax)
+
+### Syntaxe étendue (spread syntax)
+
 La syntaxe étendue permet de dire "prend tout les données dans ce tableau", exemple :
 
 ```javascript
@@ -68,7 +84,9 @@ a = [...a, 'cinq', 'six', 'sept'];
 //Unshift
 a = ['moins un', 'zero', a...];
 ```
-### Objet
+
+## Objet
+
 Un objet sert a réunir des données ensemble pour faciliter la représentation de quelque chose (abstrait ou pas). Normalement, on doit avoir une classe pour faire des objets mais pas en Javascript parce que ... Javascript. On utilise tout le temps `const` puisque c'est une norme, celui-ci se déclare ainsi (la déclaration peut se faire sur une ou plusieurs lignes) :
 
 ```javascript
@@ -100,7 +118,9 @@ x = new String();
 y = new Number();
 z = new Boolean(); 
 ```
-### Classe
+
+## Classe
+
 Les classes sont les moules à objets OO de Javascript. Le "boilerplate code" d'une classe en Javascript est le suivant :
 ```javascript
 class ClassName {
@@ -117,10 +137,11 @@ Afin de déclarer un objet à partir d'une classe, il suffit d'écrire le code s
 ```javascript
 let foo = new ClassName(parameter1, parameter2);
 ```
-#### Déstructurisation
+
+### Déstructurisation
+
 Si nous avons une fonction qui prend en paramètre un objet mais que nous n'utilisons que quelques unes de ces propriétés, la déstructurisation est optimale. La déstructurisation permet de minimiser la répétition de code en plaçant les propriété nécessaire d'une fonction dans un objet reçu en paramètre d'une fonction. En voici un exemple :
-<br>
-<br>
+<br><br>
 Imaginons que nous avons un objet représentant une tortue et que nous voulons y faire une fonction qui nourrit l'animal (elle ne fera qu'imprimer de l'information à la console).
 
 ```javascript
@@ -145,7 +166,8 @@ function feedDestructured({name, meal, diet}) {
 ```
 **Note** : Le code n'est pas nécéssairement plus court dans cet exemple-ci mais dans un exemple avec un plus gros objet ou nous devions utiliser à mainte reprise plusieurs des propriétés, la déstructurisation devient optimale.
 
-#### Héritage
+### Héritage
+
 Afin de créer une classe qui hérite d'une autre classe, il suffit d'utilisé le mot clef `extends` après la définition de la classe ainsi :
 ```javascript
 class ClassName extends SomeOtherClass{
@@ -160,8 +182,10 @@ class ClassName extends SomeOtherClass{
 ```
 Ainsi, la classe `ClassName` hérite de `SomeOtherClass` ainsi que de tout ses membres.
 
-## Blocs conditionnels
-### If
+# Blocs conditionnels
+
+## If
+
 La syntaxe du `if` va comme suit :
 
 ```javascript
@@ -173,13 +197,17 @@ if (condition1) {
     //code
 }
 ```
-### Inline if
+
+## Inline if
+
 La syntaxe du inline if va comme suit :
 ```javascript
 let c = ((a < b) ? true : false);
 ```
 Si la condition est vraie, `true` sera associer à `c` sinon `false` y sera associé. <br>**Note** : Le inline if est entourer de parenthèses.
-### Switch
+
+## Switch
+
 La syntaxe du `switch` va comme suit :
 
 ```javascript
@@ -194,7 +222,9 @@ switch(expression) {
         //code
 } 
 ```
-### Try / catch
+
+## Try / catch
+
 Le try / catch sert à la gestion d'erreur dans un bout de code qui pourrait potentiellement planter. Si javascript rencontre une erreure peu importe où (dans le try), peu importe comment, javascript exécutera le code dans le catch. La syntaxe du try / catch va comme suit : 
 
 ```javascript
@@ -204,8 +234,11 @@ try {
     //code
 }
 ```
-## Boucles
-### For
+
+# Boucles
+
+## For
+
 La syntaxe du `for` va comme suit :
 
 ```javascript
@@ -213,7 +246,9 @@ for (let i = 0; i < 10; i++) {
     //code
 }
 ```
-### While
+
+## While
+
 La syntaxe du `while` va comme suit :
 
 ```javascript
@@ -221,7 +256,9 @@ while (condition) {
     //code
 }
 ```
-### Do While
+
+## Do While
+
 La syntaxe du `do while` va comme suit :
 
 ```javascript
@@ -230,7 +267,9 @@ do {
 }
 while (condition);
 ```
-## Fonctions
+
+# Fonctions
+
 La syntaxe d'une fonction va comme suit :
 
 ```javascript
@@ -239,14 +278,18 @@ function myFunction(p1, p2) {
 }
 ```
 **Note** : La fonction peut retourner quelque chose ou pas et prendre des paramètres ou pas.
-### Appel de fonctions
+
+## Appel de fonctions
+
 L'appel d'une fonction est très simple, il suffit d'écrire son nom et de lui donner ses paramètres entre parenthèses et si celle-ci appartient à un objet, l'appeler à partir de son objet ainsi : 
 
 ```javascript
 sum(2, 2);          //fonction globale
 person.getAge();    //fonction d'un objet
 ```
-## Fonctions anonymes
+
+# Fonctions anonymes
+
 Les fonction anonymes sont des fonctions qui au lieu d'être instanciée dans une variable ne sont jamais instanciée et plutôt définies sur le champs, en voici un exemple :
 
 ```javascript
@@ -255,7 +298,9 @@ setTimeout(function() {
 }, 1000);
 ```
 **Explication** : La fonction `setTimeout()` nécéssite une autre fonction en paramètre, sauf que au lieu de définir cette fonction au paravent et de la passer ensuite en paramètre, on la définit sur le champs et ensuite on continue à passer les paramètre que `setTimeout()` attend, comme si de rien.
-## Fonctions flèches
+
+# Fonctions flèches
+
 Les fonctions flèche (arrow function) sont une autre façon d'écrire une fonction qui est particulièrement utile lors de l'écriture de fonctions anonymes. Voyons, à l'aide d'étapes, comment transformer une fonction simple en un fonction flèche encore plus simple.
 <br><br>
 Voici la fonction de base : 
@@ -285,7 +330,8 @@ let sum = (a, b) => a + b;
 <br>
 **Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie (ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris).
 
-### Fonctions flèches anonymes
+## Fonctions flèches anonymes
+
 Effectivement, les fonctions flèches sont surtout utile lorsque nous devons faire des fonctions anonymes. Voici l'exemple d'un peu plus haut en fonction flèche anonyme :
 
 ```javascript
@@ -294,7 +340,9 @@ setTimeout(() => {
 }, 1000);
 ```
 **Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
-## Promesses
+
+# Promesses
+
 Les promesses en javascript sont des objets qui, tout comme une promesse dans la vraie vie, promet de faire quelque chose lorsque quelque chose d'autre est terminer. C'est comme si le code disait : "Jte promet dude que j'va exécuter ste fonction là si toute la patente marche. J'te le jure!". La magie la dedans c'est que on peux lui dire de faire quelque chose après une action qui peux prendre beaucoup de temps comme un téléchargement ou une requête à un API. De plus, il est possible de passé du stock (variables, objets, tableau, you name it) d'une promesse à la fonction qu'elle doit exécuter tout dépendament si elle se résolue (succès) ou si elle échoue. Donc, voyons un exemple (avec syntaxe pédagogique) d'une promesse : 
 
 ```javascript
@@ -316,7 +364,9 @@ promise.then((message) => {
 **Explication** : Donc en gros ici, on décrit notre promesse en y passant une fonction flèche anonyme (remarqué que la fonction dans la promesse prend deux paramètres, `resolve` et `reject` qui sont les fonctions qu'on va appelés plus tard, vous pouvez les nommer comme bon vous semble) et si le résultat est bon on appel la méthode `resolve()` avec un message et dans le cas contraire on appel la méthode `reject()` avec un autre message! <br><br>
 Suite à la description de notre promesse, on décris sont agissement dépendant de quelle fonction notre promesse va appeler (donc si il y à succès ou échec) une fois que son exécution est terminer (dans le `promise.then().catch()`). Dans le `then()` on passe une autre fonction flèche anonyme qui elle reçoit le paramètre du `resolve()` et dans cette fonction on décris ce que l'on veux faire si la promèsse est un succès (et inversement, dans le `catch()` on décris ce que l'on veux faire si la promèsse échoue). <br><br>
 **Note** : Il aurait été possible d'écrire le `.then()` immédiatement après la définition de la promesse mais comme préciser précédemment, j'ai préférer utiliser une syntaxe pédagogique par souçis de compréhension.
-### Fonctions async / await
+
+## Fonctions async / await
+
 Les fonctions "async / await" sont une meilleure façon d'écrire des promesses ou de travailler avec des promesses, la syntaxe fait plus de sens au lecteur et elle est aussi plus plaisante à écrire. Maintenant, nous allons améliorer syntaxiquement la promesse précédante! : 
 
 ```javascript

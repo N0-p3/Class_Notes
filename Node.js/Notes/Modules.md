@@ -1,5 +1,16 @@
-# Modules
-## Théorie
+<style>
+    .title{
+        font-size: 37px;
+        text-align: center;
+        border-bottom: solid rgb(143, 143, 143);
+        border-width:2px;
+    }
+</style>
+
+<p class="title"> Modules </p>
+
+# Théorie
+
 Chaque fichier .js rouler dans node.js est "wrapper" dans une fonction et c'est ce "scope" qu'on confond souvent avec le "scope" globale. Le hic, c'est que le "scope" dans lequel on se trouve lorsque l'on écrit du code dans un fichier .js (rouler dans node.js) est enfait le scope de cette fonction et cette fonction se trouve elle même dans un module. Donc les modules sont comme cette grosse pièce dans le moteur de node.js qui représente un fichier. 
 <br><br>
 Cette fonction qui enveloppe notre code se nomme la "Module wrapper function" et à certains paramètres que nous pouvons utiliser (mais pas redéfinir). Veulliez inspecté la table suivante pour plus d'information :
@@ -11,7 +22,8 @@ Cette fonction qui enveloppe notre code se nomme la "Module wrapper function" et
 | __filename | Le nom du fichier du module. |
 | __dirname  | Le nom du dossier du module. |
 
-## Création d'un module (sous forme d'objet)
+# Création d'un module (sous forme d'objet)
+
 Dans le fichier ou vous voulez créer du code a exporter vers un autre fichier, faite les étapes suivantes : 
 1. Créer un autre fichier .js avec du code (par exemple une fonction).
 2. Ajouter dans ce même fichier la ligne suivante (Note : ceci fonctionne aussi avec des variables) : 
@@ -19,7 +31,9 @@ Dans le fichier ou vous voulez créer du code a exporter vers un autre fichier, 
 ```javascript
 module.exports.nomDeLaChoseUneFoisExporter = nomDeLaChoseAExporter;
 ```
-## Chargement d'un module (sous forme d'objet)
+
+# Chargement d'un module (sous forme d'objet)
+
 Dans le fichier ou vous voulez importer du code, faite les étapes suivantes : 
 Note : 
 1. Utiliser la fonction require() pour importer ce que le fichier spécifie qu'il à a exporter de cette façon : 
@@ -32,7 +46,9 @@ const foo = require('../Path/Vers/Le/Fichier/A/Importer.js');
 foo.nomDeLaChoseUneFoisExporter             //Variable
 foo.nomDeLaChoseUneFoisExporter(a, b, c)    //Fonction
 ```
-## Création d'un module (sous forme singulière)
+
+# Création d'un module (sous forme singulière)
+
 Dans le fichier ou vous voulez créer du code a exporter vers un autre fichier, faite les étapes suivantes : 
 1. Créer un autre fichier .js avec du code (par exemple une fonction).
 2. Ajouter dans ce même fichier la ligne suivante (Note : ceci fonctionne aussi avec des variables) : 
@@ -40,7 +56,9 @@ Dans le fichier ou vous voulez créer du code a exporter vers un autre fichier, 
 ```javascript
 module.exports = nomDeLaChoseAExporter;
 ```
-## Chargement d'un module (sous forme singulière)
+
+# Chargement d'un module (sous forme singulière)
+
 Dans le fichier ou vous voulez importer du code, faite les étapes suivantes : 
 Note : 
 1. Utiliser la fonction require() pour importer ce que le fichier spécifie qu'il à a exporter de cette façon (sauf que ici, foo est la chose singulière que nous avons préciser d'exporter lors de la création précédante et non un objet qui contient la fonction ou la variable) : 
@@ -54,7 +72,9 @@ const foo = require('../Path/Vers/Le/Fichier/A/Importer.js');
 foo             //Variable
 foo(a, b, c)    //Fonction
 ```
-## Module Path
+
+# Module Path
+
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/path.html) si vous en avez besoin.
 <br><br>
 Ce module sert à travaillier avec des paths de fichiers et de dossiers. Pour commencer il suffit de l'inclure ainsi :
@@ -77,7 +97,9 @@ L'objet donnée par cette fonction ressemble à ceci :
 | name       | 'test'                                            |
 
 **Note** : Il est donc plus facile d'utiliser le module Path si il nous faut gosser avec un path que si nous utilisions une string.
-## Module OS
+
+# Module OS
+
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/os.html) si vous en avez besoin.
 <br><br>
 Ce module sert à obtenir de l'information sur l'OS ou passer par l'OS pour aller chercher de l'informations à propos de la machine, pour commencer il suffit de l'inclure ainsi :
@@ -97,7 +119,9 @@ Affichage à la console :
 Mémoire totale : 12347944960 
 Mémoire libre : 6432976896
 ```
-## Module File System
+
+# Module File System
+
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/fs.html) si vous en avez besoin.
 <br><br>
 Ce module permet d'intéragir avec les fichiers (écrire, lire créer et supprimer), pour commencer il suffit de l'inclure ainsi :
@@ -120,7 +144,9 @@ fs.readdir('./', (err, files) => {
     else {console.log(files);}
 });
 ```
-## Module Event
+
+# Module Event
+
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/events.html) si vous en avez besoin.
 <br><br>
 Ce module permet de créer des évènements et de les gérer (faire l'abonement d'une fonction à une autre, de les décrires et etc.). Pour commencer il suffit de l'inclure ainsi :
@@ -153,7 +179,8 @@ Et ensuite nous avons levé l'évènement avec la fonction `emit()` en lui passa
 En bref :
 la fonction `on()` **OU** `addListener()` ajoute un listener à un évènement et la fonction `emit()` appel l'évènement passé en paramètre.
 
-### Argument d'évènement
+## Argument d'évènement
+
 Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant les données que vous voulez passer au "listener" et de le recevoir en ajoutant un paramètre à la fonction qui écoute l'évènement. Comme ceci :
 ```javascript
 const EventEmitter = require('events');
@@ -168,7 +195,9 @@ emitter.addListener('eventName', (arg) => {
 emitter.emit('eventName', {number: 480, type: 'Sentient', penisSize: 'Xlarge'});
 ```
 **Note** : Il est tout à fait possible de déstructuriser l'objet reçu ou encore d'envoyer plusieur objets (dans un tableau). Je dit bien l'un **OU** l'autre puisque on ne peut déstructurer un tableau d'objet.
-## Module HTTP
+
+# Module HTTP
+
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/http.html) si vous en avez besoin.
 <br><br>
 Ce module permet de créer un server, de gérer ses connections et plus encore, pour commencer il suffit de l'inclure ainsi :

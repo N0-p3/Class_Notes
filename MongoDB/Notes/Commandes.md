@@ -1,5 +1,16 @@
-# Commandes
-## Commandes de bases
+<style>
+    .title{
+        font-size: 37px;
+        text-align: center;
+        border-bottom: solid rgb(143, 143, 143);
+        border-width:2px;
+    }
+</style>
+
+<p class="title"> Commandes </p>
+
+# Commandes de bases
+
 Voici les commandes de bases et une description de ce qu'elle font :
 
 | Commande             | Description                                                                                                                           |
@@ -14,8 +25,10 @@ Voici les commandes de bases et une description de ce qu'elle font :
 | cls                  | Nettoie l'écran.                                                                                                                      |
 | exit                 | Quitte mongosh.                                                                                                                       |
 
-**Note** : Dans les sections suivante il se peut que je parle d'"objet" qui sont en fait des documents, je les nommes ainsi puisque leur syntaxe est exactement pareil à celle d'un objet JSON ou JS (comme précisé précédement dans la [section théorique](./Theorie.md#Syntaxe)).<br>
-## Create
+**Note** : Dans les sections suivante il se peut que je parle d'"objet" qui sont en fait des documents, je les nommes ainsi puisque leur syntaxe est exactement pareil à celle d'un objet JSON ou JS (comme précisé précédement dans la [section théorique](./Theorie.md#Syntaxe)).
+
+# Create
+
 Voici les commandes servant à la création de collections et de documents (en bref) :
 | Exemple de commande                                  | Description                   |
 |------------------------------------------------------|-------------------------------|
@@ -39,7 +52,9 @@ db.users.insertOne({
     }
 })
 ```
-## Read
+
+# Read
+
 Voici les commandes servant à la lecture de collections et de documents : 
 | Commandes                               | Description                                                                                                                                                           |
 |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -59,7 +74,9 @@ Voici les commandes servant à la lecture de collections et de documents :
 **Note 2** : Il est possible d'utiliser la fonction `sort()` avec plusieurs données (ce qui va trier les données dans l'ordre dans laquelle elles sont écrite).<br>
 **Note 3** : Lorsque l'on filtre avec un objet, c'est comme si on demandais de nous sortir tout les objets qui on les données que nous y passons. <br>
 **Note 4** : Lorsque l'on filtre avec un objet **ET** que l'on spécifie les champs que l'on veux, si on spécifie juste un champ positivement (donc on veux qu'il nous le donne, on a mit un 1) **SEULEMENT** ce champ sera retourné. Dans le cas contraire, si on spécifie un champ négativement (donc on ne veux pas le champ, on a mit un 0) **SEULEMENT** ce champs sera ignoré (tout les autres seront présent). Finalement si nous mettons des deux type de modificateur de présence de champ (1 ou 0) il fera exactement cela, montrera ceux qui sont a 1 et par ceux qui sont à 0. De plus, 0 et 1 peuvent être remplacer par `false` et `true`.
-## Update
+
+# Update
+
 Voici les commandes servant à la mise à jour de documents :
 | Commandes                                   | Description                                                                                                   |
 |---------------------------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -68,7 +85,9 @@ Voici les commandes servant à la mise à jour de documents :
 | `replaceOne({data: value}, object)`         | Remplace le premier document qui correspond à la recherche (premier paramètre) par le second objet passé.     |
 
 **Note** : Lorsque l'on veux faire une mise à jour sur tout les documents, il suffit de faire un `updateMany()` avec le premier paramètre vide, comme ça : `db.<nomCollection>.updateMany({}, modifierObject)`.
-## Delete
+
+# Delete
+
 **Note** : les commandes des opérations dans cette section fonctionnent **EXACTEMENT** comme le `find()` mais supprime ce qu'elle trouve au lieu de l'imprimer à l'écran.
 Voici les commandes servant à la suppression de documents :
 | Commandes                   | Description                                          |
@@ -76,7 +95,8 @@ Voici les commandes servant à la suppression de documents :
 | `deleteOne({data: value})`  | Supprime le premier document qui match la recherche. |
 | `deleteMany({data: value})` | Supprime tous les documents qui match la recherche.  |
 
-## Objet de mise à jour
+# Objet de mise à jour
+
 Voici les différents objets de mise à jour disponible avec mongoDB :
 | Objet de mise à jour         | Description                                                   |
 |------------------------------|---------------------------------------------------------------|
@@ -88,7 +108,9 @@ Voici les différents objets de mise à jour disponible avec mongoDB :
 | `{$pull: {data: value}}`     | Enlève `value` au tableau `data`.                             |
 
 **Note** : Si on "push" sur un tableau qui n'existe pas, le tableau sera créer.
-### Exemple d'usage d'objets de mise à jour
+
+## Exemple d'usage d'objets de mise à jour
+
 Voici des exemples d'usage des objets de mise à jour :
 | Objet de mise à jour | Exemple                                                                                     | Description                                                                               |
 |----------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
@@ -99,7 +121,8 @@ Voici des exemples d'usage des objets de mise à jour :
 | `$push`              | `db.users.updateMany({}, {$push: {friends: 'George'}})`                                     | Ajoute 'George' au tableau `friends` pour tout les utilisateurs.                          |
 | `$pull`              | `db.users.updateMany({}, {$pull: {friends: 'Nathaniel'}})`                                  | Enlève 'Nathaniel' au tableau `friends` pour tout les utilisateurs.                       |
 
-## Objet de filtre
+# Objet de filtre
+
 Voici les différents objets de filtres disponible avec mongoDB :
 | Objet de filtre                        | Signification      | Description                                                                                   |
 |----------------------------------------|--------------------|-----------------------------------------------------------------------------------------------| 
@@ -117,7 +140,8 @@ Voici les différents objets de filtres disponible avec mongoDB :
 | `{ $exists: true / false }`            | exists             | Vérifie si le champ auquel cet objet est comparé existe (ou pas, dépendant du bool).          |
 | `{ $expr: filterObject }`              | expression         | Effectue une comparaison entre deux champs dépendant de l'objet filtre passé.                 |
 
-### Exemple d'usage d'objets de filtre
+## Exemple d'usage d'objets de filtre
+
 Voici des exemples d'usage des objets de filtre avec `find()` : 
 | Objet de filtre | Exemple                                                    | Description                                                                        |
 |-----------------|------------------------------------------------------------|------------------------------------------------------------------------------------|

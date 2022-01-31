@@ -1,5 +1,5 @@
 # Table des matières
-- [**Théorie**](Notes/Theorie.md#theorie)
+- [**Théorie**](Notes/Theorie.md)
   - [Installation](Notes/Theorie.md#installation)
     - [Windows](Notes/Theorie.md#windows)
     - [Linux](Notes/Theorie.md#linux)
@@ -40,7 +40,7 @@
   - [Afficher le temps à la console](Notes/Affichage_a_la_console.md#afficher-le-temps-à-la-console)
   - [Afficher une trace d'exécution](Notes/Affichage_a_la_console.md#afficher-un-trace-dexécution)<br><br>
 
-- [**Modules**](Notes/Modules.md#modules)
+- [**Modules**](Notes/Modules.md)
   - [Théorie](Notes/Modules.md#théorie)
   - [Création d'un module (sous forme d'objet)](Notes/Modules.md#création-dun-module-sous-forme-dobjet)
   - [Chargement d'un module (sous forme d'objet)](Notes/Modules.md#chargement-dun-module-sous-forme-dobjet)
