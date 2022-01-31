@@ -1,13 +1,4 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Bases </p>
+<p style="font-size: 37px; text-align: center; border-bottom: solid rgb(143, 143, 143); border-width:2px;"> Bases </p>
 
 # Connexion
 
