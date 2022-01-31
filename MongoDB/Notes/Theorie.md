@@ -1,14 +1,3 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Théorie </p>
-
 # Définition Générale
 
 MongoDB est un SGBD orienté document ce qui signifie qu'il n'y à pas de SQL n'y de réelle structure dans une collection (table), cette dernière dépend de ce que nous, administrateur de BD, mettons à l'intérieur. Pensez y un peu comme à un document qui contient du JSON mais dans lequel on peut, à l'aide de fonctions, accéder au contenu et faire les opérations du CRUD. 

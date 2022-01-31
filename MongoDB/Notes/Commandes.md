@@ -1,14 +1,3 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Commandes </p>
-
 # Commandes de bases
 
 Voici les commandes de bases et une description de ce qu'elle font :

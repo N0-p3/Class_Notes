@@ -1,14 +1,3 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Théorie </p>
-
 # Installation
 
 Afin d'installer Mongoose, assurez vous d'avoir MongoDB, mongosh et Node.js d'installés. Par la suite, assurez-vous de suivre les étapes suivantes

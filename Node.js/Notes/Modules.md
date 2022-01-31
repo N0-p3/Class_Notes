@@ -1,14 +1,3 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Modules </p>
-
 # Théorie
 
 Chaque fichier .js rouler dans node.js est "wrapper" dans une fonction et c'est ce "scope" qu'on confond souvent avec le "scope" globale. Le hic, c'est que le "scope" dans lequel on se trouve lorsque l'on écrit du code dans un fichier .js (rouler dans node.js) est enfait le scope de cette fonction et cette fonction se trouve elle même dans un module. Donc les modules sont comme cette grosse pièce dans le moteur de node.js qui représente un fichier. 

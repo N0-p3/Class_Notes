@@ -1,14 +1,3 @@
-<style>
-    .title{
-        font-size: 37px;
-        text-align: center;
-        border-bottom: solid rgb(143, 143, 143);
-        border-width:2px;
-    }
-</style>
-
-<p class="title"> Affichage à la console </p>
-
 # Litéraux de modèle (template literals)
 Le "template literal" est une façon de contourner la concaténation de chaine tout en affichant les valeurs de certaines variables. Afin de se faire il suffit de s'assurer que la variable est atteignable (donc qu'elle est dans le bon 'scope') et de l'entourer d'un signe de dollar et d'acollades ainsi :
 

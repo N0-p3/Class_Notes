@@ -1,5 +1,3 @@
-<p style="font-size: 37px; text-align: center; border-bottom: solid rgb(143, 143, 143); border-width:2px;"> Bases </p>
-
 # Connexion
 
 Afin de se connecté à votre base de donné MongoDB avec Node.js, assurez-vous d'avoir suivis les étapes dans l'[installation](./Theorie.md#installation) et inspirez vous du code boilerplate suivant (libre de droit) dans votre fichier javascript :
