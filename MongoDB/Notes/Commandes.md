@@ -151,10 +151,13 @@ Voici des exemples d'usage des objets de filtre avec `find()` :
 **Note** : Lorsque l'on accède à la valeur d'une colonne il est important d'ajouter un `$` ainsi : `'$nomColonne'` comme dans l'exemple de `$expr`.
 
 Il est possible de combiné les objets de filtre ainsi : 
+
 ```
 db.users.find({age: {$gte: 20, lte: 40}}) //Retourne les utilisateurs entre 20 et 40 ans inclusivement
 ```
+
 Cette Combinaison de filtre est l'équivalent de : celle-ci :
+
 ```
 db.users.find({$and: [{age: {$gte: 20}}, {age: {$lte: 40}}]})
 ```

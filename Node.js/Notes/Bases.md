@@ -12,6 +12,7 @@ const d = 2;
 const e = false;
 const f = 'tonpere';
 ```
+
 Les déclarations peuvent aussi être séparés par des virgules pour être sur une même ligne (si `let` est placer au début, toutes les variables seront variables et inversement pour `const`) :
 
 ```javascript
@@ -32,6 +33,7 @@ jeux[0] = 'Skyrim';
 jeux[1] = 'The Witcher III : The Wild Hunt';
 jeux[2] = 'tamere : la pute';
 ```
+
 **Note** : La déclaration d'un tableau avec le mot `new` peut causer des comportements inattendus, exemple : 
 
 ```javascript
@@ -40,6 +42,7 @@ const chiffres1 = [40];
 //Créer un tableau avec 40 éléments
 const chiffres2 = new Array(40);
 ```
+
 **Note 2** : Membre important d'un tableau : 
 
 | Membre    | Description                                        |
@@ -62,6 +65,7 @@ let b = ['trois', 'quatre'];
 let c = [...a, ...b];
 console.log(c); //Résultat : [ 'un', 'deux', 'trois', 'quatre' ]
 ```
+
 Avec cette syntaxe nous pouvons donc faire des `push` ou des `unshift` manuellement de plusieur choses en même temps (et de manière plus belle) :
 
 ```javascript
@@ -81,12 +85,14 @@ Un objet sert a réunir des données ensemble pour faciliter la représentation 
 ```javascript
 const voiture = {type:'Fiat', model:'500', color:'white'};
 ```
+
 On peut aussi accéder au donnée d'un objet de plusieurs manières :
 
 ```javascript
 voiture.type
 voiture['type']
 ```
+
 **Note** : On peut stocker des fonctions (que l'on va par la suite appelé méthodes) dans un objet et les appelés ainsi :
 
 ```javascript
@@ -99,6 +105,7 @@ const voiture = {   type:'Fiat',
                 };
 voiture.setColor('green');
 ```
+
 **Note 2** : NE PAS CRÉER DE VARIABLES DE TYPE PRIMAL EN TANT QU'OBJET, C'EST MAL! (ralenti l'éxécution et complique le code).
 Exemple **A NE PAS FAIRE** :
 
@@ -111,6 +118,7 @@ z = new Boolean();
 ## Classe
 
 Les classes sont les moules à objets OO de Javascript. Le "boilerplate code" d'une classe en Javascript est le suivant :
+
 ```javascript
 class ClassName {
     constructor(parameter1, parameter2) {
@@ -122,7 +130,9 @@ class ClassName {
     }
 }
 ```
+
 Afin de déclarer un objet à partir d'une classe, il suffit d'écrire le code suivant :
+
 ```javascript
 let foo = new ClassName(parameter1, parameter2);
 ```
@@ -153,11 +163,13 @@ function feedDestructured({name, meal, diet}) {
     console.log(`Fed ${name} ${meal} ${diet}`);
 }
 ```
+
 **Note** : Le code n'est pas nécéssairement plus court dans cet exemple-ci mais dans un exemple avec un plus gros objet ou nous devions utiliser à mainte reprise plusieurs des propriétés, la déstructurisation devient optimale.
 
 ### Héritage
 
 Afin de créer une classe qui hérite d'une autre classe, il suffit d'utilisé le mot clef `extends` après la définition de la classe ainsi :
+
 ```javascript
 class ClassName extends SomeOtherClass{
     constructor(parameter1, parameter2) {
@@ -169,6 +181,7 @@ class ClassName extends SomeOtherClass{
     }
 }
 ```
+
 Ainsi, la classe `ClassName` hérite de `SomeOtherClass` ainsi que de tout ses membres.
 
 # Blocs conditionnels
@@ -190,9 +203,11 @@ if (condition1) {
 ## Inline if
 
 La syntaxe du inline if va comme suit :
+
 ```javascript
 let c = ((a < b) ? true : false);
 ```
+
 Si la condition est vraie, `true` sera associer à `c` sinon `false` y sera associé. <br>**Note** : Le inline if est entourer de parenthèses.
 
 ## Switch
@@ -286,6 +301,7 @@ setTimeout(function() {
     console.log('Execute later after 1 second');
 }, 1000);
 ```
+
 **Explication** : La fonction `setTimeout()` nécéssite une autre fonction en paramètre, sauf que au lieu de définir cette fonction au paravent et de la passer ensuite en paramètre, on la définit sur le champs et ensuite on continue à passer les paramètre que `setTimeout()` attend, comme si de rien.
 
 # Fonctions flèches
@@ -299,6 +315,7 @@ function sum(a, b) {
     return a + b;
 }
 ``` 
+
 la première étape est de se débarasser du mot clef `function` et de mettre cette fonction dans une variable :
 
 ```javascript
@@ -306,6 +323,7 @@ let sum = (a, b) => {
     return a + b;
 }
 ```
+
 Et voila, le tour est joué en majorité. je dit bien en majorité puisque vue que la fonction ne fait qu'une ligne il est possible de la simplifier encore plus avec cette prochaine étape.
 <br><br>
 Vue que nous n'avons qu'une seule ligne de code nous pouvons retirer les `{}`, mettre le tout sur une seule ligne et enlever le mot clef `return` pusique celui-ci est assumé par javascript, ce qui nous donne :
@@ -313,10 +331,9 @@ Vue que nous n'avons qu'une seule ligne de code nous pouvons retirer les `{}`, m
 ```javascript
 let sum = (a, b) => a + b;
 ```
-**Note** : Si il n'y à qu'un seul paramètre à la fonction, on pourrait enlever les parenthèses entourant les paramètres. 
-<br>
-**Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal. 
-<br>
+
+**Note** : Si il n'y à qu'un seul paramètre à la fonction, on pourrait enlever les parenthèses entourant les paramètres.<br>
+**Note 2** : L'appel de ces fonctions est identique à celui d'une fonction normal. <br>
 **Note 3** : Normalement une fonction d'un objet à le mot de clef `this` associé au 'scope' (environnement) d'ou elle est appelée mais avec une fonction flèche, le 'scope' est celui d'ou la fonction flèche est définie (ou dequoi du genre la ya quelque chose de casser avec le scope et les fonctions flèche desfois j'ai pas trop compris).
 
 ## Fonctions flèches anonymes
@@ -328,6 +345,7 @@ setTimeout(() => {
     console.log('Execute later after 1 second');
 }, 1000);
 ```
+
 **Note** : Nous pouvons simplifier encore plus la chose, si la fonction `setTimeout()` n'avait q'un seul paramètre, nous aurions pus la mettre sur une seule ligne comme vue précédemment dans [Fonctions flèches](#fonctions-flèches)
 
 # Promesses
@@ -350,6 +368,7 @@ promise.then((message) => {
     console.log(`Ceci est exécuter dans le catch, puisque la promèsse à échoué. Message : ${message}`);
 });
 ```
+
 **Explication** : Donc en gros ici, on décrit notre promesse en y passant une fonction flèche anonyme (remarqué que la fonction dans la promesse prend deux paramètres, `resolve` et `reject` qui sont les fonctions qu'on va appelés plus tard, vous pouvez les nommer comme bon vous semble) et si le résultat est bon on appel la méthode `resolve()` avec un message et dans le cas contraire on appel la méthode `reject()` avec un autre message! <br><br>
 Suite à la description de notre promesse, on décris sont agissement dépendant de quelle fonction notre promesse va appeler (donc si il y à succès ou échec) une fois que son exécution est terminer (dans le `promise.then().catch()`). Dans le `then()` on passe une autre fonction flèche anonyme qui elle reçoit le paramètre du `resolve()` et dans cette fonction on décris ce que l'on veux faire si la promèsse est un succès (et inversement, dans le `catch()` on décris ce que l'on veux faire si la promèsse échoue). <br><br>
 **Note** : Il aurait été possible d'écrire le `.then()` immédiatement après la définition de la promesse mais comme préciser précédemment, j'ai préférer utiliser une syntaxe pédagogique par souçis de compréhension.
@@ -381,6 +400,7 @@ async function doStuff() {
 
 doStuff();
 ```
+
 **Note** : Veuilliez noter que j'ai entouré ma promesse dans une fonction qui la retourne par souçi de beauté, normallement ce n'est même pas nous qui vons faire les promesses mais c'est nous qui allons les recevoir. Tout ça pour dire que ma promesse est entouré par une fonction qui la retourne mais ne vous en faite pas pour ce bout la tant que vous comprenez! <br><br>
 **Explication** : On à remplacer notre `.then()` par une fonction qui elle est définit avec le mot `async` ce qui dit à javascript : "Exécute ça sur un autre thread (parce que tu va devoir attendre)". Par la suite, on reçoit le retour de notre promesse que l'on stocke dans une variable `message` en utilisant le mot clef `await`. C'est donc à cette ligne que notre code va attendre et lorsque la promesse est terminée, il va éxécuter la ligne suivante, pas avant! <br><br> Bien sûr si une erreur occure, on tombera alors dans le catch!<br><br>
 **Note 2** : Ce type de syntaxe pour les promesses devient particulièrement plus intéressante lorsque nous devons travailler avec des promesses l'une dans l'autre ce qui provoque des `.then()` sur des `.then()` sur des `.then()` et ainsi de suite. <br>

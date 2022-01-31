@@ -5,9 +5,11 @@ MongoDB est un SGBD orienté document ce qui signifie qu'il n'y à pas de SQL n'
 # Syntaxe
 
 Non seulement la syntaxe utilisée pour la gestion d'une base de donnée est semblable à des appels de fonctions mais en plus, les données entrées dans un BD mongoDB sont très semblable, syntaxiquement parlant, à des objets javascript (ou JSON). Voici un exemple : 
+
 ```
 db.users.insertOne({name: "John",  age: 30})
 ```
+
 **PS** : Ceci insert un document dans la collections "users".
 
 # Structure

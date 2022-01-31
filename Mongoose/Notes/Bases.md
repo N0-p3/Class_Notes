@@ -1,12 +1,15 @@
 # Connexion
 
 Afin de se connecté à votre base de donné MongoDB avec Node.js, assurez-vous d'avoir suivis les étapes dans l'[installation](./Theorie.md#installation) et inspirez vous du code boilerplate suivant (libre de droit) dans votre fichier javascript :
+
 ```javascript
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/testdb');
 ```
+
 Alternativement, il est possible de lancer une fonction lors de la connexion et de gérer les erreures à la connexion en passant deux fonctions à la méthode `connect()`, la première est une fonction sans paramètres qui est exécuté à chaque connexion et la seconde est une connexion qui reçoit un paramètre (l'erreure) et est exéctuer à chaque erreure de connexion. Le code boilerplate ressemble à ceci : 
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -16,6 +19,7 @@ mongoose.connect('mongodb://localhost/testdb', () => {
     console.log(`Erreure de connexion : ${e}`)
 });
 ```
+
 Cependant, mongoose est tellement magique que même si vous tentez d'exécuter des commandes et qu'aucune connexion n'à été faite, il va les mettre dans une file et les exécuter lorsqu'une connexion est finalement ouverte (stu pas magique!). Ce qui rend la seconde manière de se connecter un peu désuette.
 
 # Schéma
@@ -27,6 +31,7 @@ Un schéma est une définition d'une collection. En gros, vue que MongoDB permet
 ## Création d'un schéma
 
 Afin de créer un schéma, nous devons faire un fichier javascript qui va contenir notre schéma et s'assurer que mongoose y est importé, ensuite il suffira de mettre ce schéma dans une variable et de définir notre schéma avec des paires clef-type (comme les documents dans MongoDB) séparer par une virgule. Ensuite, il faudra créer un modèle de ce schéma. Pour ce faire, nous allons utilisé la méthode `model()` de mongoose en lui passant le nom du schéma ainsi que le schéma que nous avons stocker dans une variable précédement. Pour terminer il ne restera plus qu'à exporter le modèle. Le code ressemblera essentiellement à ceci : 
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -37,11 +42,13 @@ const userSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', userSchema);
 ```
+
 **Note** : Les types de mongoose sont disponibles [ici](https://mongoosejs.com/docs/schematypes.html).
 
 ## Utilisation d'un schéma
 
 Afin d'utiliser un schéma, il suffit de l'importer et de s'en servir pour créer des objets : 
+
 ```javascript
 const mongoose = require('mongoose');
 const User = require('./User'); //Importation
@@ -50,11 +57,13 @@ mongoose.connect('mongodb://localhost/testdb');
 
 const user = new User({name: 'Bob', age: 2}); //Utilisation
 ```
+
 **Note 2** : Remarquez qu'appartir de `User`, nous avons non seulement un modèle mais aussi la collection `users` dans notre base de donnée, puisque à partir de `User`, nous avons toutes les fonctions (de mongosh) comme `find()`, `findOne()` et etc.
 
 ## Architecture de schéma
 
 Dans un schéma, les données peuvent être architecturées vraiment comme on le souhaite. On peux avoir des reférences à d'autres modèles (un peu comme des clefs secondaires), on peux avoir des tableaux de données, bref tout ce que vous avez vue qu'on peux faire avec mongosh on peux le faire avec mongoose mais en mieux! (c'est plus "clean" avec les schémas). En voici un exemple : 
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -75,8 +84,10 @@ const userSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', userSchema);
 ```
+
 Maintenant dans notre schéma `User` nous avons un tableau typé (`hobbies`), un tableau non typé qui peux contenir tout types confondues (`favoriteThings`), une date (`birthday`), une référence à un autre modèle (`bestFriend`) et un autre schéma (`address`)!<br><br>
 Cependant, il serait plus propre de prendre notre objet `address` et de la mettre dans son propre schéma (et idéalement dans son propre fichier)! Ainsi :
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -99,8 +110,25 @@ const userSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', userSchema);
 ```
+
 **Note** : Ainsi (en mettant l'addresse dans un autre schéma), mongoDB va créer une clef pour cet objet en plus des données fourni à l'intérieur. Un peu comme si l'addresse était une chose à part et donc qu'elle avait sa propre identité à part.<br><br>
-Pour ce qui est de travailler avec ce schéma c'est comme avant sauf qu'il y à maintenant plus de données dans votre modèle à créer et chacun d'entre eux doit contenir le bon type.
+Pour ce qui est de travailler avec ce schéma c'est comme avant sauf qu'il y à maintenant plus de données dans votre modèle à créer et chacun d'entre eux doit contenir le bon type. <br>
+**Note 2** : Si vous voulez spécifier que le champ `bestFriend` est un `User` aussi, vous pouvez étendre la définition de ce champ ainsi :
+
+```javascript
+const userSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    hobbies: [String],
+    birthday: Date,
+    bestFriend: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User"
+    },
+    favoriteThings: [],
+    address: addressSchema
+});
+```
 
 ## Validation de schéma
 
@@ -164,8 +192,10 @@ const userSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', userSchema);
 ```
+
 **Note** : Veuillez noter que `unique` n'est pas un validateur, celui-ci créer un indexe unique pour ce champ (je suis pas sur d'avoir compris mais c'est pas un validateur plus d'information [ici](https://masteringjs.io/tutorials/mongoose/unique). <br>
 **Note 2** : Il est aussi possible de mettre une fonction à un validateur comme `default` par exemple.
+
 ```javascript
 function returnShibougameau() {
     return "Shibougameau";
@@ -185,6 +215,7 @@ const addressSchema = new mongoose.Schema({
 ### Validation personnalisé 
 
 Parfois il pourrait être utile de faire ses propres validateurs et mongoose permet de faire ça! Simplement en ajoutant un validateur nommé `validate` à votre schéma. Ce validateur à la syntaxe d'un objet et fonctionne un peu comme un `if` (donc il est basé sur un condition que nous définissons). À l'intérieur du `validate` nous avons le champ `validator` qui est notre condition (fonction) qui retourne `true` ou `false` et `message` qui est le message (mais aussi, encore une fois, une fonction) d'erreur si jamais la condition n'est pas respecté. En voici un exemple :
+
 ```javascript
 const userSchema = new mongoose.Schema({
     name: String
@@ -197,6 +228,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 ```
+
 **Note** : `props.value` est la valeur du champ,  de `age` dans l'occurrence. <br>
 **NOTE SUPER-MÉGA-GIGA-IMPORTANTE** : Toute validation n'est exécuter SEULEMENT que par les fonctions `save()` et `create()` de notre modèle ET NON PAR LES FONCTIONS COMME `findOneAndUpdate()` ou `findByIdAndUpdate()` etc. donc faites attention quand vous utilisez les autres fonctions "built-in" de Mongoose.
 
@@ -209,6 +241,7 @@ Les modèles sont les objets résultant de l'utilisation de nos schéma, par exe
 ### Multi-étape
 
 Pour sauvegarder les modèles dans votre BD Mongo, il suffit d'appeler la méthode `save()` de votre modèle précédemment créer. Il est aussi possible, vue que `save()` est une fonction async, d'exécuter une fonction `then()` par dessus la fonction `save()` pour ensuite lui passer une fonction pour décrire ce que l'on veux qu'elle fasse une fois que le modèle est sauvegardé dans la BD. En voici un exemple : 
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -223,7 +256,9 @@ user.save().then(() => {
     console.log(`user : ${user.name} saved\n`)
 }); 
 ```
+
 Si vous préférez la syntaxe avec async await, vous pouvez l'utilisé : 
+
 ```javascript
 const mongoose = require('mongoose');
 const User = require('./User'); //Importation
@@ -238,6 +273,7 @@ async function makeOneUserAndSave() {
     console.log(`user ${user.name} saved\n`);
 } 
 ```
+
 **Note** : La magie la dedans (parce que oui il y à de la magie une peu partout) est que, tout comme mongosh, tant que rien n'est sauvegarder dans une BD, la BD n'existe pas. Ce principe s'applique aussi ici, sauf qu'il s'applique sur le collections ET sur les BD. Donc mongoose s'occupe de créer une collection pour vous pour chaque schéma ET EN PLUS il la renomme pour qu'elle soit au pluriel (pour les noms en anglais dans tout les cas). N'est-ce pas merveilleux? <br>
 **Note 2** : Vous allez remarquer que dans votre BD, il va y avoir une donnée que vous n'avez pas spécifier mais qui est là pour chaque document. Le `__v`, tout ce que vous devez savoir c'est que c'est mongoose qui à ajouter cette donnée. <br>
 **Note 3** : Il serait plus poli de mettre tout ce qui est création, altération et suppression de données dans un try catch si jamais il y à une erreure.
@@ -245,6 +281,7 @@ async function makeOneUserAndSave() {
 ### Singulière
 
 Si vous souhaitez créer un instance de votre modèle et la sauvegarder en une seule étape, une alternative s'offre à vous et elle fait la même chose que le code dans la métode précédente. Pour ce faire, nous allons utilisé la méthode `create()` de mongoose ainsi : 
+
 ```javascript
 const mongoose = require('mongoose');
 const User = require('./User'); //Importation
@@ -262,6 +299,7 @@ async function makeOneUserAndSave() {
 ## Mise à jour d'un modèle
 
 Afin de mettre à jour un modèle, il suffit d'apporter les modifications nécéssaire à votre modèle en local et ainsi de re-appeler la méthode `save()` de votre modèle ainsi :
+
 ```javascript
 const mongoose = require('mongoose');
 const User = require('./User'); //Importation
@@ -277,3 +315,26 @@ async function makeOneUserAndSave() {
     console.log(`user ${user.name} saved\n`);
 } 
 ```
+
+**Note** : Si nécéssaire, faite une requête pour trouver l'utilisateur en question et ensuite, quand vous l'avez en local, vous le modifier et appeler `save()`.
+
+# Requêtes
+
+## Style mongosh
+
+Afin d'effectuer une requête, il suffit d'appeler les même méthodes que dans mongosh, par exemple la méthode `find()`, `findOne()` ou encore `exists()` sur votre modèle et la syntaxe est identique à celle dans mongosh. Cela va de soi pour toute les méthodes offertes par mongoose. Voici un exemple: 
+
+```javascript
+async function doStuff() {
+    try {
+        const user = await User.find({name : "Bob"});
+    } catch(e) {
+        console.log(e.message);
+    }
+}
+```
+
+**Note** : Malgré que cela peut sembler évident, la méthode `find()` retourne un tableau de modèle et la méthode `findOne()` n'en retourne qu'un.
+
+## Style mongoose
+

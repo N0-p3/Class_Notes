@@ -7,6 +7,7 @@ Afin d'installer Mongoose, assurez vous d'avoir MongoDB, mongosh et Node.js d'in
 4. Installer mongoose avec : `npm i mongoose`.
 5. (**OPTIONNELLEMENT**) Installer nodemon avec : `npm i --save-dev nodemon` (nodemon re-exécute votre script chaque fois que vous le sauvegarder pour vous sauvez quelques secondes d'arrêt et de ré-execution).
 6. (**OPTIONNELLEMENT**) Indiqué quel script que nodemon doit re-exécuter dans le fichier `package.json` en changeant la ligne dans l'objet `scripts` pour la mienne : 
+
 ```
 {
   "name": "exp",
@@ -27,6 +28,7 @@ Afin d'installer Mongoose, assurez vous d'avoir MongoDB, mongosh et Node.js d'in
   }
 }
 ``` 
+
 7. (**OPTIONNELLEMENT**) Changer `test.js` pour le nom de votre fichier javascript
 **Note** : Pour rouler votre code à l'avenir, utilisé la commande `npm run project` (ce qui va exécuter la commande que vous venez de mettre dans votre fichier `package.json`). Comme vous vous en doutez, oui vous pouvez changer "project" pour ce que vous voulez.
 

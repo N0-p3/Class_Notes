@@ -30,7 +30,9 @@ Note :
 ```javascript
 const foo = require('../Path/Vers/Le/Fichier/A/Importer.js');
 ```
+
 2. Utiliser votre fichier importé à l'aide de la variable créer à l'étape précédante ainsi : 
+
 ```javascript
 foo.nomDeLaChoseUneFoisExporter             //Variable
 foo.nomDeLaChoseUneFoisExporter(a, b, c)    //Fonction
@@ -55,6 +57,7 @@ Note :
 ```javascript
 const foo = require('../Path/Vers/Le/Fichier/A/Importer.js');
 ```
+
 2. Utiliser votre fonction ou variable importée ainsi : 
 
 ```javascript
@@ -71,12 +74,15 @@ Ce module sert à travaillier avec des paths de fichiers et de dossiers. Pour co
 ```javascript
 const path = require('path');
 ```
+
 Le module "Path" peux faire un objet path avec un chemin vers un fichier à l'aide de la fonction parse, ainsi :
 
 ```javascript
 let pathObj = path.parse(__filename);
 ``` 
+
 L'objet donnée par cette fonction ressemble à ceci :
+
 | Propriétés | Donnée                                            |
 |------------|---------------------------------------------------|
 | root       | '/'                                               |
@@ -96,14 +102,18 @@ Ce module sert à obtenir de l'information sur l'OS ou passer par l'OS pour alle
 ```javascript
 const os = require('os');
 ```
+
 Exemple d'usage du module OS : Aller chercher la quantité de mémoire totale et la quantité de mémoire libre : 
+
 ```javascript
 let totalMem = os.totalmem();
 let freeMem = os.freemem();
 
 console.log(`Mémoire totale : ${totalMem} \nMémoire libre : ${freeMem}`);
 ```
+
 Affichage à la console :
+
 ```
 Mémoire totale : 12347944960 
 Mémoire libre : 6432976896
@@ -118,6 +128,7 @@ Ce module permet d'intéragir avec les fichiers (écrire, lire créer et supprim
 ```javascript
 const fs = require('fs');
 ```
+
 **Note** : La plupart des fonctions dans le module File System sont en double, une version est la version synchrone et l'autre est asynchrone. Par exemple `access()` est async et `accessSync()` est synchrone. De plus, toutes fonctions asynchrones prennent un argument de plus, l'argument se trouve à être une fonction qui est appelé une fois que l'opération est terminé (c'est la callback function).
 <br><br>
 Exemple d'usage du module File System :
@@ -145,6 +156,7 @@ const EventEmitter = require('events');
 //instanciation
 const emitter = new EventEmitter();
 ```
+
 **Note** : Remarquez que j'ai délibérement écrit `EventEmitter` en UpperCamelCase, j'ai fait cela puisque le retour de ce require n'est pas un module mais bien une classe (et non un objet). Ce qui explique la seconde ligne ou je fait une instance (un objet) de cette classe que j'ai importé.
 <br><br>
 Voici un exemple très simple d'un événement élevé (Raise an event) et d'un abonnement à cet évènement (Register a listener) :
@@ -161,6 +173,7 @@ emitter.on('eventName', () => {
 //Raise an event
 emitter.emit('eventName');
 ```
+
 **Explication** : Donc en gros, nous avons fait un "listener" qui écoute si un évènement au nom de `eventName` est levé et on lui passe une fonction qui est la fonction qui sera exécuter lorsque l'évènement sera levé (dans mon cas j'ai fais une fonction flèche anonyme qui ne fait que "logger" quelque chose).
 <br><br>
 Et ensuite nous avons levé l'évènement avec la fonction `emit()` en lui passant le nom de l'évènement à levé!
@@ -171,6 +184,7 @@ la fonction `on()` **OU** `addListener()` ajoute un listener à un évènement e
 ## Argument d'évènement
 
 Parfois, il serait utile de non seulement levé un évènement mais aussi d'envoyer des données lorsque l'on lêve un évènement à la fonction qui écoute sur cet évènement en question. Pour ce faire il suffit de passé dans la fonction `emit()` un objet contenant les données que vous voulez passer au "listener" et de le recevoir en ajoutant un paramètre à la fonction qui écoute l'évènement. Comme ceci :
+
 ```javascript
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
@@ -183,6 +197,7 @@ emitter.addListener('eventName', (arg) => {
 //Raise an event
 emitter.emit('eventName', {number: 480, type: 'Sentient', penisSize: 'Xlarge'});
 ```
+
 **Note** : Il est tout à fait possible de déstructuriser l'objet reçu ou encore d'envoyer plusieur objets (dans un tableau). Je dit bien l'un **OU** l'autre puisque on ne peut déstructurer un tableau d'objet.
 
 # Module HTTP
@@ -194,7 +209,9 @@ Ce module permet de créer un server, de gérer ses connections et plus encore, 
 ```javascript
 const http = require('http');
 ```
+
 La création d'un serveur va comme suit (je ne vais pas l'expliquer elle est asser "self-explanatory") :
+
 ```javascript
 const http = require('http');
 
@@ -216,8 +233,7 @@ const server = http.createServer((request, response) =>{
 server.listen(PORT);
 console.log(`Listening on port ${PORT}...`);
 ```
-**Note** : Remarquez comment on doit terminer chaque réponse avec un `response.end();` ce qui suggère une certaines flexibilité dans notre abilité à écrire des réponses.
-<br>
-**Note 2** : `JSON.stringify()` peut aussi prendre des objets.
-<br>
+
+**Note** : Remarquez comment on doit terminer chaque réponse avec un `response.end();` ce qui suggère une certaines flexibilité dans notre abilité à écrire des réponses.<br>
+**Note 2** : `JSON.stringify()` peut aussi prendre des objets.<br>
 **Note 3** : Comme vous vous en doutez, on va pas vraiment utiliser Node.js pour faire un serveur http puisque plus on ajoute de route (de pages en gros) plus que le site va être lourd. C'est pour ça que l'on va utilisé Express.js pour gérer le serveur "BackEnd".
