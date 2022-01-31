@@ -95,7 +95,7 @@ Pour ce qui est de travailler avec ce schéma c'est comme avant sauf qu'il y à 
 ### Validation de schéma
 Afin de validé qu'un champ est requis ou qu'il doit être conforme à certaines règles, un validation du schéma s'impose. Celle-ci est relativement simple, il suffit de transformer une donné en un objet dans notre schéma, de décrire son type et ensuite de décrire la validation que nous voullons y faire à l'aide des différents validateurs.
 #### Liste de validateurs
-Voici la liste des validateurs ainsi que leur type associé (puisque certain validateur ne va pas avec certain type de données) : 
+Voici la liste des validateurs, leur types applicables (puisque certain validateur ne va pas avec certain type de données) et le type de valeur qu'il faut lui donné : 
 | Validateur | Types applicables | Valeur du validateur | Description                                                                        |
 |------------|-------------------|----------------------|------------------------------------------------------------------------------------|
 | required   | Tous              | Bool                 | Indique que le champ doit être remplit.                                            |
@@ -150,9 +150,40 @@ const userSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', userSchema);
 ```
-**Note** : Veuillez noter que `unique` n'est pas un validateur, celui-ci créer un indexe unique pour ce champ (je suis pas sur d'avoir compris mais c'est pas un validateur plus d'information [ici](https://masteringjs.io/tutorials/mongoose/unique).
+**Note** : Veuillez noter que `unique` n'est pas un validateur, celui-ci créer un indexe unique pour ce champ (je suis pas sur d'avoir compris mais c'est pas un validateur plus d'information [ici](https://masteringjs.io/tutorials/mongoose/unique). <br>
+**Note 2** : Il est aussi possible de mettre une fonction à un validateur comme `default` par exemple.
+```javascript
+function returnShibougameau() {
+    return "Shibougameau";
+}
+
+const addressSchema = new mongoose.Schema({
+    zipCode: String,
+    number: Number,
+    street: String,
+    city: {
+        type: String
+        default: () => returnShibougameau();
+    }
+});
+```
 #### Validation personnalisé 
-Parfois il pourrait être utile de faire ses propres validateurs et mongoose permet de faire ça! Simplement en ajoutant un champ `validate` à votre YEET
+Parfois il pourrait être utile de faire ses propres validateurs et mongoose permet de faire ça! Simplement en ajoutant un validateur nommé `validate` à votre schéma. Ce validateur à la syntaxe d'un objet et fonctionne un peu comme un `if` (donc il est basé sur un condition que nous définissons). À l'intérieur du `validate` nous avons le champ `validator` qui est notre condition (fonction) qui retourne `true` ou `false` et `message` qui est le message (mais aussi, encore une fois, une fonction) d'erreur si jamais la condition n'est pas respecté. En voici un exemple :
+```javascript
+const userSchema = new mongoose.Schema({
+    name: String
+    age: {
+        type: Number
+        validate: {
+            validator: v => v % 2 === 0,
+            message: props => `${props.value} is not an even number`
+        }
+    }
+});
+```
+**Note** : `props.value` est la valeur du champ,  de `age` dans l'occurrence. <br>
+**NOTE SUPER-MÉGA-GIGA-IMPORTANTE** : Toute validation n'est exécuter SEULEMENT que par les fonctions `save()` et `create()` de notre modèle ET NON PAR LES FONCTIONS COMME `findOneAndUpdate()` ou `findByIdAndUpdate()` etc. donc faites attention quand vous utilisez les autres fonctions "built-in" de Mongoose.
+
 ## Modèle
 Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
 ### Création d'un modèle
