@@ -338,3 +338,42 @@ async function doStuff() {
 
 ## Style mongoose
 
+Si vous le souhaitez, mongoose offre des fonctions pour faire des requêtes qui est très plus lisible, fait essentiellement la même chose mais qui ajoute beaucoup de code (donc le résultat est pas très très beau souvent). Voici un exemple : 
+
+```javascript
+async function doStuff() {
+    try {
+        const user = await User.where("name").equals("Bob");
+    } catch(e) {
+        console.log(e.message);
+    }
+}
+```
+
+**Note** Le principe est que on peux enchainé certaines fonctions pour qu'elles aillent un certain effet, par exemple ceci : 
+
+```javascript
+async function doStuff() {
+    try {
+        const user = await User.where("age").lt(30).gt(18);
+    } catch(e) {
+        console.log(e.message);
+    }
+}
+```
+
+Dans cet exemple, la fonction `lt()` et `gt()` on tout deux un effet sur le champ `age` et si on met un autre `where()` au bout de cette ligne, les fonctions appelées par la suite auront un impacte sur ce second `where()` et ainsi de suite.
+
+### Fonctions de requête mongoose
+
+| Fonction     | Type du paramêtre | Définition                                                                                                   |
+|--------------|-------------------|--------------------------------------------------------------------------------------------------------------|
+| `where()`    | String            | On y passe le nom du champ sur lequel on veux faire une recherche.                                           |
+| `equals()`   | All               | Vérifie si le champ du dernier `where()` est égal à la valeur du paramètre passé.                            |
+| `gt()`       | Number            | Vérifie si le champ du dernier `where()` est plus grand que la valeur du paramètre passé.                    |
+| `lt()`       | Number            | Vérifie si le champ du dernier `where()` est plus petit que la valeur du paramètre passé.                    |
+| `limit()`    | Number            | Limite le nombre de résultat de la recherche à la valeur du paramètre passé.                                 |
+| `select()`   | String            | Limite la recherche au champ passé en paramètre.                                                             |
+| `populate()` | String            | Ajoute le document dont l'Id fait partie d'un des champs spécifié du modèle sur lequel on exécute la méthode |
+
+**Note** : La fonction `populate()` va aller sur notre document (dans la BD) et copier-coller les informations (le document au complet) dans le champs spécifier qui avait (avant d'appeler `populate()`) un Id d'un autre document. Cela ne fonctionnera que si le champ spécifie à quel collection il fait référence comme indiqué à la fin de [cette section](./Bases.md#architecture-de-schéma).
