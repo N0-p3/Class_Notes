@@ -232,6 +232,71 @@ const userSchema = new mongoose.Schema({
 **Note** : `props.value` est la valeur du champ,  de `age` dans l'occurrence. <br>
 **NOTE SUPER-MÉGA-GIGA-IMPORTANTE** : Toute validation n'est exécuter SEULEMENT que par les fonctions `save()` et `create()` de notre modèle ET NON PAR LES FONCTIONS COMME `findOneAndUpdate()` ou `findByIdAndUpdate()` etc. donc faites attention quand vous utilisez les autres fonctions "built-in" de Mongoose.
 
+## Fonctionalitées de schéma
+
+Dans cette section, nous verrons de multiples façons de rajouter un certain niveau de fonctionnalité à nos schémas au lieu qu'ils ne soient que des moules à document MongoDB.
+**Note** : Dans cette section, j'utilise délibérement des fonctions qui ne sont pas des fonctions flèches parce que autrement, nous n'avons pas accès au mot clef `this` ce qui rend les fonctions un peu inutile.
+
+### Méthodes de schéma
+
+Les méthodes de schéma permettent d'indiqué des actions à faire avec les données de vos modèles (donc les instances de vos schémas). Pour ce faire, il suffit d'ajouter une fonction et de passé ladite fonction à `nomDuSchema.methods.nomDeLaFonction`. Par exemple si je veux que chaque utilisateur ait une fonction pour dire bonjour : 
+
+```javascript
+userSchema.methods.sayHi = function () {
+    console.log(`Hi! my name is ${this.name}`);
+}
+```
+
+### Statique de schéma
+
+Les statiques de schéma permettent d'indiqué des actions à faire avec le schéma lui même. Pour ce faire, il suffit d'ajouter une fonction et de passé ladite fonction à `nomDuSchema.statics.nomDeLaFonction`. Par exemple avec une statique de schéma on pourrait définir notre propre fonction de recherche :
+
+```javascript
+userSchema.methods.findByName() = function (name) {
+    return this.find({ name: new RegExp(name, "i")});
+}
+```
+
+### Fonction-requête de schéma
+
+Les fonctions-requête de schéma permettent d'indiqué des actions à faire avec le schéma lui même comme dans une requête. Cela signifie que vous pouvez utilisé cette fonction dans une enchainement de d'autres fonction-requêtes prédéfini comme `where()`. Pour ce faire, il suffit d'ajouter une fonction et de passé ladite fonction à `nomDuSchema.query.nomDeLaFonction`. Par exemple :
+
+```javascript
+userSchema.query.byName() = function (name) {
+    return this.where({ name: new RegExp(name, "i")});
+}
+```
+
+**Note** : Cette fonction `byName()` sera maintenant disponible parmit les [fonction-requêtes de mongoose](./Bases.md#fonctions-de-requête-mongoose) et pourra être utilisé comme telle.
+
+### Virtuels de schéma
+
+Les virtuels de schéma permettre de "construire" d'autres données (un peu comme rajouter un champ) à partir de ce qui se trouve déja dans le modèle sans avoir à conserver lesdites données dans le document (puisque ça ferait de l'information en double). Par exemple, dans un schéma ou j'ai déjà le nom et l'email d'un utilisateur et que je veux ces deux informations sous forme d'une seule et unique propriété, le virtuel devient utile et rempli exactement cette tache. <br><br>
+Pour ce faire, il suffit d'ajouter une fonction à `nomDuSchema.virtual("nomDeLaPropriete").get()` en la passant en tant que paramêtre dans le `get()`. Exemple :
+
+```javascript
+userSchema.virtual("nomEmail").get(function () {
+    return `${this.name} \t\t <${this.email}>`;
+})
+```
+
+Et maintenant, la propriété nomEmail est disponible sur un modèle, tout comme la propriété "name" et le tout sans avoir à modifier le schéma ou à duppliquer l'information dans le document.
+
+## Middleware de schéma
+
+Le "middleware" de schéma est une façon d'insérer du code entre (plus précisément avant et/ou après) certaines actions. Pour ce faire, vous devez passer la fonction avec laquelle vous voulez faire dequoi avant ou après à la fonction `pre()` (pour faire du "middleware" avant) ou `post()` (pour faire du "middleware" après) en tant que premier paramètre et en second paramètre, vous passez votre fonction qui est le "middleware". Voici un exemple :
+
+```javascript
+userScheme.pre('save', function(next) {
+    this.lastUpdated = Date.now();
+    next();
+});
+```
+
+Donc ici, avant tout les appels de la méthode `save()`, nous mettons à jour la propriété "lastUpdated" à la date de maintenant.
+
+**Note** : le `next` est obligatoire dans les paramètres de votre fonction et il sert à dire à mongoose de continuer, de faire ce qu'il doit faire (avec ça on peut enchainé les "middlewares" si on veux).
+
 # Modèle
 
 Les modèles sont les objets résultant de l'utilisation de nos schéma, par exemple, la variable `user` dans l'exemple précédant est notre modèle.
