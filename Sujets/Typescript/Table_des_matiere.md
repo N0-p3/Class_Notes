@@ -23,3 +23,11 @@
     - [Interface](Notes/Bases.md#interface)
         - [Modificateurs de propriétés](Notes/Bases.md#modificateurs-de-propriétés)
         - [Fonctions d'interface](Notes/Bases.md#fonctions-dinterface)
+
+# Sources 
+
+Suite à une demande spéciale d'un de mes co-équipiers, voici les sources utilisés pour la construction de ces notes :
+
+- Un [Crash Course](https://www.youtube.com/watch?v=BCg4U1FzODs) de [Traversy Media](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA).
+- Le [Manuel d'Installation de Typescript](https://www.typescriptlang.org/download).
+- La [Documentation de Typescript](https://www.typescriptlang.org/docs/).

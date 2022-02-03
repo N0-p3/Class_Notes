@@ -52,3 +52,15 @@
   - [Module Event](Notes/Modules.md#module-event)
     - [Argument d'évènement](Notes/Modules.md#argument-dévènement)
   - [Module HTTP](Notes/Modules.md#module-http) <br><br>
+
+# Sources 
+
+Suite à une demande spéciale d'un de mes co-équipiers, voici les sources utilisés pour la construction de ces notes :
+
+- Un [Crash Course](https://www.youtube.com/watch?v=TlB_eWDSMt4) de [Programming with Mosh](https://www.youtube.com/channel/UCWv7vMbMWH4-V0ZXdmDpPBA).
+- Des exemples de [W3Schools](https://www.w3schools.com/js/).
+- Des [Pro-tips](https://www.youtube.com/watch?v=Mus_vwhTCq0) de [Fireship](https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA).
+- Une explication sur les [Arrow functions](https://www.youtube.com/watch?v=h33Srr5J9nY) de [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
+- Une explication sur les [Promesses](https://www.youtube.com/watch?v=DHvZLI7Db8E) de [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
+- Une explication sur les [Fonctions Async/Await](https://www.youtube.com/watch?v=V_Kr9OSfDeU) de [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
+- La [Documentation Officiel](https://nodejs.org/en/docs/) de [Node.js](https://nodejs.org/en/)

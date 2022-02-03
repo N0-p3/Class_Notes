@@ -29,4 +29,10 @@
   - [Requêtes](Notes/Bases.md#requêtes)
     - [Style mongosh](Notes/Bases.md#style-mongosh)
     - [Style mongoose](Notes/Bases.md#style-mongoose)
-      - [Fonctions de requête mongoose](Notes/Bases.md#fonctions-de-requête-mongoose)
+      - [Fonctions de requête mongoose](Notes/Bases.md#fonctions-de-requête-mongoose) <br><br>
+
+# Sources 
+
+Suite à une demande spéciale d'un de mes co-équipiers, voici les sources utilisés pour la construction de ces notes :
+
+- Un [Crash Course](https://www.youtube.com/watch?v=DZBGEVgL2eE) de [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
