@@ -1,4 +1,6 @@
-# Types primitifs
+# Données et variables
+
+## Types primitifs
 
 Les types dans Typescript sont optionnel MAIS inférés ce qui signifie que si on met une String dans un variable, Typescript comprend que la variable à la type de String et donc on ne peux pas mettre autre chose que des Strings. Voici la syntaxe de déclaration de variables avec des types en plus d'un exemple démontrant tout les types primitifs :
 
@@ -83,6 +85,20 @@ function sum(a: number, b: number): number {
 
 **Note** : Si on veux que notre fonction retourne rien on peux le spécifier en mettant `void` dans la valeur de retour (dans la signature de la fonction).
 **Note 2** : On peux aussi avoir des Unions en tant que paramètre d'une fonction.
+
+## Générique (template)
+
+Les génériques sont une façon de créer un bout de code réutilisable dépendament de la situation. Disons que nous voulons qu'une fonction nous retourne un tableau avec un type que nous ne voulons pas prédéfinir (pour faire en sorte que cette fonction sois réutilisable et pour par avoir à faire plusieurs fonctions qui font la même chose) nous allons utilisé un générique. Voici un exemple :
+
+```typescript
+function getArray<T>(items: T[]): T[] {
+	return new Array().concat(items);
+}
+
+let numArray = getArray<number>([1, 2, 3, 4, 5]);
+```
+
+Donc avec les génériques on peux créer du code plus souple qui permet de faire plus de choses tout en restant stricte (en utilisant un type primitif et non `any`).
 
 # Type (struct)
 
