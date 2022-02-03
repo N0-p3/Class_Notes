@@ -93,6 +93,42 @@ L'objet donnée par cette fonction ressemble à ceci :
 
 **Note** : Il est donc plus facile d'utiliser le module Path si il nous faut gosser avec un path que si nous utilisions une string.
 
+## Fonctions du module
+
+### Join
+
+La fonction `join()` est très intéressante et "fun" à utiliser, en gros elle prend plusieurs arguents (autant qu'on veux) qui sont toutes des strings et qui définissent un "path", elle les smash ensemble et ajoute elle même les "forward slashs" entre les paramètres passé. <br><br>
+
+Exemple :
+
+```javascript
+path.join(__dirname, 'frontend', 'html', 'index.html');
+```
+
+Va retourner :
+
+```
+frontend/html/index.html
+```
+
+**Note** : Il est possible d'utiliser les `./` et `../` dans cette fonction.
+
+### Normalize
+
+La fonction `normalize()` est aussi très intéressante, celle-ci va normaliser (simplifier et corriger) un "path" qu'on lui passe. <br><br>
+
+Exemple :
+
+```javascript
+path.normalize('/foo/bar//baz/asdf/quux/..');
+```
+
+Va retourner :
+
+```
+/foo/bar/baz/asdf
+```
+
 # Module OS
 
 Voici la [Documentation officielle](https://nodejs.org/dist/latest-v17.x/docs/api/os.html) si vous en avez besoin.
