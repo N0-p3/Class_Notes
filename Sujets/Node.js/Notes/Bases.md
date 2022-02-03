@@ -120,13 +120,19 @@ z = new Boolean();
 Les classes sont les moules à objets OO de Javascript. Le "boilerplate code" d'une classe en Javascript est le suivant :
 
 ```javascript
-class ClassName {
-    constructor(parameter1, parameter2) {
-        this.property1 = parameter1;
-        this.property2 = parameter2;
+class Person {
+    name;
+    age;
+    sex;
+
+    constructor(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
     }
-    doStuff() {
-        //code
+
+    makeOlder(years) {
+        this.age += years;
     }
 }
 ```
@@ -134,7 +140,7 @@ class ClassName {
 Afin de déclarer un objet à partir d'une classe, il suffit d'écrire le code suivant :
 
 ```javascript
-let foo = new ClassName(parameter1, parameter2);
+let tamere = new Person('tamere', 69, true);
 ```
 
 ### Déstructurisation
@@ -171,10 +177,12 @@ function feedDestructured({name, meal, diet}) {
 Afin de créer une classe qui hérite d'une autre classe, il suffit d'utilisé le mot clef `extends` après la définition de la classe ainsi :
 
 ```javascript
-class ClassName extends SomeOtherClass{
-    constructor(parameter1, parameter2) {
-        this.property1 = parameter1;
-        this.property2 = parameter2;
+class Employee extends Person {
+    id;
+
+    constructor(id, name, age, sex) {
+        super(name, age, sex);
+        this.id = id;
     }
     doStuff() {
         //code
@@ -182,7 +190,10 @@ class ClassName extends SomeOtherClass{
 }
 ```
 
-Ainsi, la classe `ClassName` hérite de `SomeOtherClass` ainsi que de tout ses membres.
+Ainsi, la classe `Employee` hérite de `Person` ainsi que de tout ses membres. <br><br>
+
+**Note** : Si vous souhaitez appeler le constructeur de la classe parent dans le constructeur d'une classe enfant, il suffit d'utiliser la fonction `super()` comme précisé dans l'exemple précédent. <br>
+**Note 2** : Il est important d'appeler le constructeur du parent avant tout sinon Node.js aime pas ça! 
 
 # Blocs conditionnels
 
