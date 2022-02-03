@@ -47,10 +47,13 @@
   - [Création d'un module (sous forme singulière)](Notes/Modules.md#création-dun-module-sous-forme-singulière)
   - [Chargement d'un module (sous forme singulière)](Notes/Modules.md#chargement-dun-module-sous-forme-singulière)
   - [Module Path](Notes/Modules.md#module-path)
+  	- [Fonctions du module](Notes/Modules.md#fonctions-du-module)
+  		- [Join](Notes/Modules.md#join)
+  		- [Normalize](Notes/Modules.md#normalize)
   - [Module OS](Notes/Modules.md#module-os)
   - [Module File System](Notes/Modules.md#module-file-system)
   - [Module Event](Notes/Modules.md#module-event)
-    - [Argument d'évènement](Notes/Modules.md#argument-dévènement)
+  	- [Argument d'évènement](Notes/Modules.md#argument-dévènement)
   - [Module HTTP](Notes/Modules.md#module-http) <br><br>
 
 # Sources 
