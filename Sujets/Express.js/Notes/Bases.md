@@ -79,7 +79,6 @@ Voici un petit exemple de requète API avec Express.js qui va chercher tout les 
 ```javascript
 const express = require('express');
 const mongoose = require('mongoose');
-
 const User = require('./schemas/UserSchema');
 
 const PORT = 8000;
@@ -91,7 +90,6 @@ app.get('/api/users', async (req, res) => {
         const users = await User.find();
         res.json(users);
     } catch(e) {
-        console.log(e.message);
         res.json(e.message);
     }
 });
@@ -100,6 +98,58 @@ app.listen(PORT);
 ```
 
 **Note** : Remarquez que j'utilise `app.get()` vue que une requète qui va chercher tout les infos d'une BD va souvent être une requète GET.
+
+## Get one (avec GET)
+
+Voici un autre exemple de requète API, cette fois-ci nous allons récupérer un seul élément de la BD avec son ID générer automatiquement par MongoDB.
+
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const User = require('./schemas/UserSchema');
+
+const PORT = 8000;
+const app = express();
+    
+app.get('/api/users/:id', async (req, res) => {
+    mongoose.connect('mongodb://localhost/fun');
+
+    const id = (req.params.id.match(/^[0-9a-fA-F]{24}$/) ? mongoose.Types.ObjectId(req.params.id) : 0);
+
+    if (id !== 0) {
+        try {
+            User.exists({_id: id}, async (err, doc) => {
+                if (err || doc == null) {
+                    res.status(400).json({message: 'User not found'});
+                } else {
+                    const user = await User.findOne({_id: id});
+                    res.json(user);
+                }
+            });
+        } catch(e) {
+            res.json(e.message);
+        }
+    } else {
+        res.status(400).json({message: 'Invalid Id'});
+    }
+});
+
+app.listen(PORT);
+```
+
+**NOTE IMPORTANTE** : Ce code semble trop long, je sais mais c'est parce que j'ai gérer chaque erreure, sinon vous pouvez simplement éviter les erreures et faire quelque chose de super simple.
+
+### Explication
+
+Donc, en premier on défini `id` en castant la string que l'on reçoit dans la requète avec `mongoose.Types.ObjectId(req.params.id)` et on à mit ça dans un inline if qui vérifie si l'id reçu dans la requète correspond à un id dont mongoose considère comme valide (sinon y nous pitch une erreure et fait planter le serveur en disant que le cast à pas fonctionner). Si l'id de la requète est pas valide, on met 0 dans `id`. <br>
+
+Ensuite, on vérifie si `id` est pas 0 (comme un peu un guard), si c'est le cas on envoie un status 400 avec un message d'erreur et si c'est pas le cas, finalement, on fait une recherche avec l'id pour voir si il y à un user qui existe à l'id envoyé (puisque un id valide ne veux pas dire un id qui existe). Dans la méthode `User.exists()`, en 1er paramètre on lui passe l'objet de filtre pour trouvé le document auquel cet id appartient et en 2e paramètre on lui passe une fonction async qui à 2 paramètres (`err` représentant une erreure, si il y en à une, et `doc` représentant le document (CONTENANT SEULEMENT L'ID) du document trouvé). <br>
+
+Encore une fois dans un guard on s'assure que si `err` ou `doc` sont `null` on envoie un status 400 avec un message d'erreur et SINON ... finalement... on envoie le document avec `res.json(user);`. <br><br>
+
+**Note** : Remarquez comment on accède à des paramètres GET. Premièrement, on indique le nom du paramètre précédé d'un `:` à son emplacement dans la route. Deuxièmement, on va chercher l'id dans l'objet `req` avec `req.params.id`. Troisièmement il faut le tranformer en objet ObjectId pour mongoose avec `mongoose.Types.ObjectId()`. <br><br>
+
+**Note 2** : Si vous souhaitez changer le status d'une réponse inspectez le else avec vos petit yeux, on change le status avec la fonction `res.status()`, on lui passe le status ET à çela on peux enchainé `.json()` pour envoyer une réponse JSON au client.
 
 # Middleware
 
