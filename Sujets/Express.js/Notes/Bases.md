@@ -170,7 +170,7 @@ Encore une fois dans un guard on s'assure que si `err` ou `doc` sont `null` on e
 
 **Note 2** : Si vous souhaitez changer le status d'une réponse inspectez le else avec vos petit yeux, on change le status avec la fonction `res.status()`, on lui passe le status ET à çela on peux enchainé `.json()` pour envoyer une réponse JSON au client.
 
-## Create one (avec PUT)
+## Create one (avec POST)
 
 Afin de créer un utilisateur avec un API, nous devons utiliser du Middleware préfait dans Express.js pour parser notre requète. Pour ce faire il suffit d'écrire les deux lignes suivante AVANT TOUTES ROUTES dans votre fichier Javascript de serveur :
 
