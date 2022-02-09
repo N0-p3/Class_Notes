@@ -71,3 +71,10 @@ Et dans le fichier .html :
 
 <button (click)="inc()">Compte++</button>
 ```
+
+- Input/Output de component
+- Services
+- Injections de dépendance
+- Gosser avec Import dans app.module
+- Material
+- Form Reactive

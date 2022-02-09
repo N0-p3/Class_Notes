@@ -51,7 +51,10 @@ Ces normes ont été établies afin de faire respecter le LIFT qui se défini co
 
 | Commandes                           | Commandes courtes    | Descriptions                  |
 |-------------------------------------|----------------------|-------------------------------|
-| ng generate component componentName | ng g c componentName | Génération de component.      |
+| ng generate module modulePath       | ng g m modulePath    | Génération de module.         |
+| ng generate component componentPath | ng g c componentPath | Génération de composants.     |
+| ng generate service servicePath     | ng g s servicePath   | Génération de service.        |
+| ng generate class classPath         | ng g cl classPath    | Génération de classe.         |
 | npm start                           | npm start            | Exécute le "serveur" Angular. |
 | npm build                           | npm build            | Compile le projet Angular.    |
 
@@ -61,3 +64,30 @@ Ces normes ont été établies afin de faire respecter le LIFT qui se défini co
 1. Assurez-vous d'avoir npm d'installé (ce qui devrait être fait si vous avez installé Node.js).
 2. Installer Angular avec : `sudo npm i -g @angular/cli`.
 3. Confirmer que tout est bien installer avec : `ng -v`
+
+# Setup Angular
+
+Pour initialiser Angular, il suffit de rouler la commande suivante dans votre dossier qui contiendera Angular :
+
+```
+ng new -S -g --directory ./ang projectName
+```
+
+**Note** : -S skip tout ce qu'on à besoin pour faire des tests, -g skip la création du git et --directory sert à spécifier ou on installe Angular et on lui passe le nom du projet.
+
+## Questions Angular 
+
+> Voulez-vous une vérification de type plus strict?
+
+Défaut: Non <br>
+**Recommandé** : Oui
+
+> Voulez-vous ajouter le "routing" Angular?
+
+Défaut: Non <br>
+**Recommandé** : Absolument beaucoup OUI
+
+> Quel format CSS voulez-vous utiliser?
+
+Défaut: CSS <br>
+**Recommandé** : SCSS

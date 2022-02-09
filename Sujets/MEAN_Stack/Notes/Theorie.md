@@ -34,9 +34,3 @@ Défaut: Non <br>
 Défaut: CSS <br>
 **Recommandé** : SCSS
 
-## Démarrage 
-
-| Commandes | Définition                              |
-|-----------|------------------------------------------|
-| npm start | Démarrer Angular.                        |
-| npm build | Compiler Angular, prêt à la publication. |
