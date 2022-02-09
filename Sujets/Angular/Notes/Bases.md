@@ -22,7 +22,7 @@ Tout ce qui est publique dans la classe du contrôleur est disponible dans la vu
 
 ## Afficher des variables
 
-Pour afficher une valeur dans la vue, il faut la déclarer dans le contrôleur (la classe) puis utiliser les moustaches dans la vue pour afficher la valeur de la variable. <br><br>
+Pour afficher une valeur dans la vue, il faut la déclarer dans le contrôleur (la classe) puis utiliser les moustaches dans la vue pour afficher la valeur de la variable. <br>
 
 Dans le fichier .ts :
 
@@ -45,7 +45,7 @@ Et dans le fichier .html :
 
 ## Fonctions de component
 
-Pour utiliser une fonction, il faut lier une fonction du contrôleur à un événement DOM dans le HTML. Par exemple, on va ajouter un onClick sur un bouton qui incrémente le compte : <br><br>
+Pour utiliser une fonction, il faut lier une fonction du contrôleur à un événement DOM dans le HTML. Par exemple, on va ajouter un onClick sur un bouton qui incrémente le compte : <br>
 
 Dans le fichier .ts :
 
