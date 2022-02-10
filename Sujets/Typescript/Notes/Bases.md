@@ -111,7 +111,7 @@ type Person = {				// Le type
 	sex: boolean
 }
 
-const person: Person = {	// Instanciation faisnat usage du type Person
+const person: Person = {	// Instanciation faisant usage du type Person
 	name: 'Paul',
 	age: 23,
 	sex: false
