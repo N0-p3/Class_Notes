@@ -11,7 +11,9 @@
     - [Nomenclature des fichiers](Notes/Theorie.md#nomenclature-des-fichiers)
     - [Pourquoi ces normes?](Notes/Theorie.md#pourquoi-ces-normes)
   - [Commandes utiles](Notes/Theorie.md#commandes-utiles)
-  - [Installation](Notes/Theorie.md#installation) <br><br>
+  - [Installation](Notes/Theorie.md#installation)
+  - [Setup Angular](Notes/Theorie.md#setup-angular)
+    - [Questions Angular](Notes/Theorie.md#questions-angular) <br><br>
 
 - [**Bases**](Notes/Bases.md)
   - [Composant](Notes/Bases.md#composant)
