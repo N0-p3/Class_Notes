@@ -118,9 +118,9 @@ app.get('/api/users', async (req, res) => {
     mongoose.connect('mongodb://localhost/fun');
     try {
         const users = await User.find();
-        res.json(users);
+        res.json(users).end();
     } catch(e) {
-        res.json(e.message);
+        res.json(e.message).end();
     }
 });
 ```
@@ -139,14 +139,14 @@ app.get('/api/users/:id', async (req, res) => {
         const id = mongoose.Types.ObjectId(req.params.id);
         User.exists({_id: id}, async (err, doc) => {
             if (err || doc == null) {
-                res.status(400).json({message: 'User not found'});
+                res.status(400).json({message: 'User not found'}).end();
             } else {
                 const user = await User.findOne({_id: id});
-                res.json(user);
+                res.json(user).end();
             }
         });
     } catch(e) {
-        res.status(400).json({message: `User not found`});
+        res.status(400).json({message: `User not found`}).end();
     }
 });
 ```
@@ -187,7 +187,7 @@ app.post('/api/users', async (req, res) => {
     }
 
     await User.create(user);
-    res.json({message: 'SUCCES! User created'});
+    res.json({message: 'SUCCES! User created'}).end();
 });
 ```
 
@@ -207,7 +207,7 @@ app.put('/api/users/:id', async (req, res) => {
         const id = mongoose.Types.ObjectId(req.params.id);
         User.exists({_id: id}, async (err, doc) => {
             if (err || doc == null) {
-                res.status(400).json({message: 'ERROR! User not found'});
+                res.status(400).json({message: 'ERROR! User not found'}).end();
             } else {
                 let user = await User.findOne({_id: id});
                 let newUserData = req.body;
@@ -217,11 +217,11 @@ app.put('/api/users/:id', async (req, res) => {
                 user.sex = newUserData.sex;
                 
                 user.save();
-                res.json({message: `SUCCES! User with the id of ${id} has been updated`});
+                res.json({message: `SUCCES! User with the id of ${id} has been updated`}).end();
             }
         });
     } catch(e) {
-        res.status(400).json({message: `ERROR! User not found`});
+        res.status(400).json({message: `ERROR! User not found`}).end();
     }
 });
 ```
@@ -240,14 +240,14 @@ app.delete('/app/users/:id', async (req, res) => {
         const id = mongoose.Types.ObjectId(req.params.id);
         User.exists({_id: id}, async (err, doc) => {
             if (err || doc == null) {
-                res.status(400).json({message: 'ERROR! User not found'});
+                res.status(400).json({message: 'ERROR! User not found'}).end();
             } else {
                 await User.findOneAndDelete({_id: id});
-                res.json({message: `SUCCES! User with the _id of ${id} has been deleted!`});
+                res.json({message: `SUCCES! User with the _id of ${id} has been deleted!`}).end();
             }
         });
     } catch(e) {
-        res.status(400).json({message: `ERROR! User not found`});
+        res.status(400).json({message: `ERROR! User not found`}).end();
     }
 });
 ```
@@ -271,9 +271,9 @@ app.get('/api/users', async (req, res) => {
     mongoose.connect('mongodb://localhost/fun');
     try {
         const users = await User.find();
-        res.json(users);
+        res.json(users).end();
     } catch(e) {
-        res.json(e.message);
+        res.json(e.message).end();
     }
 });
 
@@ -286,17 +286,17 @@ app.get('/api/users/:id', async (req, res) => {
         try {
             User.exists({_id: id}, async (err, doc) => {
                 if (err || doc == null) {
-                    res.status(400).json({message: 'User not found'});
+                    res.status(400).json({message: 'User not found'}).end();
                 } else {
                     const user = await User.findOne({_id: id});
-                    res.json(user);
+                    res.json(user).end();
                 }
             });
         } catch(e) {
-            res.json(e.message);
+            res.json(e.message).end();
         }
     } else {
-        res.status(400).json({message: 'Invalid Id'});
+        res.status(400).json({message: 'Invalid Id'}).end();
     }
 });
 
@@ -340,17 +340,17 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const User = require('../../schemas/UserSchema');
 
-router.get('/', async (req, res) => {
+router.route('/').get(async (req, res) => {
     mongoose.connect('mongodb://localhost/fun');
     try {
         const users = await User.find();
-        res.json(users);
+        res.json(users).end();
     } catch(e) {
-        res.json(e.message);
+        res.json(e.message).end();
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.route('/:id').get(async (req, res) => {
     mongoose.connect('mongodb://localhost/fun');
 
     const id = (req.params.id.match(/^[0-9a-fA-F]{24}$/) ? mongoose.Types.ObjectId(req.params.id) : 0);
@@ -359,17 +359,17 @@ router.get('/:id', async (req, res) => {
         try {
             User.exists({_id: id}, async (err, doc) => {
                 if (err || doc == null) {
-                    res.status(400).json({message: 'User not found'});
+                    res.status(400).json({message: 'User not found'}).end();
                 } else {
                     const user = await User.findOne({_id: id});
-                    res.json(user);
+                    res.json(user).end();
                 }
             });
         } catch(e) {
-            res.json(e.message);
+            res.json(e.message).end();
         }
     } else {
-        res.status(400).json({message: 'Invalid Id'});
+        res.status(400).json({message: 'Invalid Id'}).end();
     }
 });
 
@@ -377,3 +377,143 @@ module.exports = router;
 ```
 
 Et voila, libre à vous d'étendre ce router à votre guise!
+
+## Controlleur de Router
+
+Les controlleur sont en fait des fichiers qui vont contenir des fonctions qu'on metterais normallement direct dans le router (donc c'est comme séparer les fichiers pour avoir une meilleure architecture). Donc, on commence en faisant un dossier controllers qui va contenir des fichiers javascript. Les fichier js vont avoir les fonctions de gestion des requètes. <br>
+
+Donc dans notre router on aurait ça :
+
+```javascript
+const express = require('express');
+const router = express.Router();
+
+const ctrlAuth = require('./controllers/auth');
+
+router
+    .route('/users')
+    .post(ctrlAuth.createUser)
+    .get(ctrlAuth.readAllUsers);
+
+router
+    .route('/users/:id')
+    .get(ctrlAuth.getOneUser)
+    .put(ctrlAuth.updateOneUser)
+    .delete(ctrlAuth.deleteOneUser);
+
+module.exports = router;
+```
+
+Et notre fichier /controllers/auth.js on aurait ça :
+
+```javascript
+const createUser = (req, res) => {
+    // code
+};
+
+const readAllUsers = (req, res) => {
+    // code
+};
+
+const getOneUser = (req, res) => {
+    // code
+};
+
+const updateOneUser = (req, res) => {
+    // code
+};
+
+const deleteOneUser = (req, res) => {
+    // code
+};
+
+module.exports = {
+    createUser,
+    readAllUsers,
+    getOneUser,
+    updateOneUser,
+    deleteOneUser
+};
+```
+
+Donc dans le controlleur on fait des fonctions qu'on met dans des variables et on les exports toutes à la fin pour pourvoir les utilisers dans notre router.
+
+# joi (validation)
+
+Pour faire de la validation avec Express on va utiliser joi et avant tout on va l'installer avec : 
+
+```
+npm i joi
+```
+
+Après on va spécifier notre validation dans un middleware (donc on se fait un dossier middleware et dans mon exemple je vais faire de la validation sur authentification donc je vais me faire le fichier /middleware/auth.js). Le fichier de validation va ressembler à : 
+
+```javascript
+const Joi = require('joi');
+
+const loginIsValid = (req, res, next) => {
+    const schema = Joi.object({
+        username: Joi.string().trim().min(4).messages({'*' : 'The username should have at least 4 characters'}),
+        password: Joi.string().trim().min(1).messages({'*' : 'The password is required'})
+    });
+    const result = schema.validate(req.body);
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message).end();
+    } else {
+        next();
+    }
+};
+
+module.exports = {
+    loginIsValid
+};
+```
+
+Et pour utiliser ce middleware on va faire ça un peu plus clean et on va importer notre middleware dans notre router et on va spécifier le middleware à utiliser pour chaque route (sauf que la on le fait juste sur le post de la route `/users`):
+
+```javascript
+const express = require('express');
+const router = express.Router();
+
+const ctrlAuth = require('./controllers/auth');
+const mdlAuth = require('./middlewares/auth');
+
+router
+    .route('/users')
+    .post(mdlAuth.loginIsValid, ctrlAuth.createUser)
+    .get(ctrlAuth.readAllUsers);
+
+router
+    .route('/users/:id')
+    .get(ctrlAuth.getOneUser)
+    .put(ctrlAuth.updateOneUser)
+    .delete(ctrlAuth.deleteOneUser);
+
+module.exports = router;
+```
+
+**Note** : SI vous voulez vous pouvez faire un `.use(mdlAuth.loginIsValid)` sur votre router directement pour que tout les type de requètes qui suit utilise le middleware. <br>
+
+Exemple :
+
+```javascript
+const express = require('express');
+const router = express.Router();
+
+const ctrlAuth = require('./controllers/auth');
+const mdlAuth = require('./middlewares/auth');
+
+router
+    .route('/users')
+    .use(mdlAuth.loginIsValid) //ici
+    .post(ctrlAuth.createUser)
+    .get(ctrlAuth.readAllUsers);
+
+router
+    .route('/users/:id')
+    .get(ctrlAuth.getOneUser)
+    .put(ctrlAuth.updateOneUser)
+    .delete(ctrlAuth.deleteOneUser);
+
+module.exports = router;
+```
