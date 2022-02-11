@@ -20,6 +20,8 @@
     - [Update one (avec PUT)](Notes/Bases.md#update-one-avec-put)
     - [Delete one (avec DELETE)](Notes/Bases.md#delete-one-avec-delete)
   - [Router](Notes/Bases.md#router)
+    - [Controlleur de Router](Notes/Bases.md#controlleur-de-router)
+  - [joi (validation)](Notes/Bases.md#joi-validation)
 
 # Sources 
 
